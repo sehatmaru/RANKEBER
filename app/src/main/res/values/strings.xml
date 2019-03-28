@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RANKEBER</string>
+    <string name="app_title">rankeber</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="exit">Logout</string>
+    <string name="title_logout">Logout</string>
+    <string name="content_logout">Anda ingin logout ?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+</resources>
