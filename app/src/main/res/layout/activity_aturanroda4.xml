@@ -2,11 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Roda2Activity">
+    tools:context=".AturanRoda4">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -38,5 +37,4 @@
         android:layout_below="@+id/simpleSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </RelativeLayout>

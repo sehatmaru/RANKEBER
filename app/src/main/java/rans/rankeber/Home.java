@@ -27,7 +27,7 @@ public class Home extends AppCompatActivity {
         roda2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(myActivity.getApplicationContext(), Roda2Activity.class);
+                Intent i = new Intent(myActivity.getApplicationContext(), AturanRoda2.class);
                 myActivity.startActivity(i);
             }
         });
@@ -35,7 +35,7 @@ public class Home extends AppCompatActivity {
         roda4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(myActivity.getApplicationContext(), Roda4Activity.class);
+                Intent i = new Intent(myActivity.getApplicationContext(), AturanRoda4.class);
                 myActivity.startActivity(i);
             }
         });
@@ -43,7 +43,7 @@ public class Home extends AppCompatActivity {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(myActivity.getApplicationContext(), AboutActivity.class);
+                Intent i = new Intent(myActivity.getApplicationContext(), About.class);
                 myActivity.startActivity(i);
             }
         });

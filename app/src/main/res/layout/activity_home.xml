@@ -28,9 +28,9 @@
 
             <TextView
                 android:id="@+id/txtdashboard"
-                android:textSize="42sp"
+                android:textSize="35sp"
                 android:layout_marginTop="8dp"
-                android:text="@string/beranda"
+                android:text="@string/aturan_kendaraan_bermotor"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -40,7 +40,7 @@
         <GridLayout
             android:columnCount="2"
             android:rowCount="3"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="90dp"
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false"
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                     android:gravity="center">
                     
                     <ImageView
-                        android:src="@drawable/roda2"
+                        android:src="@drawable/ic_motorcycle_black_24dp"
                         android:layout_width="80dp"
                         android:layout_height="80dp" />
 
@@ -74,7 +74,7 @@
                         android:layout_marginTop="12dp"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp"
-                        android:text="@string/roda2"
+                        android:text="@string/aturan_roda_2"
                         />
                 </LinearLayout>
 
@@ -98,7 +98,7 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:src="@drawable/roda4"
+                        android:src="@drawable/ic_car_black_24dp"
                         android:layout_width="80dp"
                         android:layout_height="80dp" />
 
@@ -108,7 +108,7 @@
                         android:layout_marginTop="12dp"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp"
-                        android:text="@string/roda4"
+                        android:text="@string/aturan_roda_4"
                         />
                 </LinearLayout>
 

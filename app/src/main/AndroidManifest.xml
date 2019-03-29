@@ -19,9 +19,9 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".Home" />
-        <activity android:name=".AboutActivity"/>
-        <activity android:name=".Roda2Activity"/>
-        <activity android:name=".Roda4Activity"/>
+        <activity android:name=".About"/>
+        <activity android:name=".AturanRoda2"/>
+        <activity android:name=".AturanRoda4"/>
     </application>
 
 </manifest>

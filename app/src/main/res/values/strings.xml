@@ -13,4 +13,8 @@
     <string name="roda2">Roda 2</string>
     <string name="roda4">Roda 4</string>
     <string name="about">Tentang</string>
+    <string name="aturan_roda_4">Aturan Roda 4</string>
+    <string name="aturan_roda_2">Aturan Roda 2</string>
+    <string name="rankeber">rankeber</string>
+    <string name="aturan_kendaraan_bermotor">Aturan Kendaraan Bermotor</string>
 </resources>
