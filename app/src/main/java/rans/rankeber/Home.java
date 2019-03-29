@@ -1,20 +1,52 @@
 package rans.rankeber;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
 public class Home extends AppCompatActivity {
-
+    private Activity myActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        this.myActivity = this;
+
+        LinearLayout roda2 = (LinearLayout) this.findViewById(R.id.roda2);
+        LinearLayout roda4 = (LinearLayout) this.findViewById(R.id.roda4);
+        LinearLayout about = (LinearLayout) this.findViewById(R.id.about);
+
+        roda2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(myActivity.getApplicationContext(), Roda2Activity.class);
+                myActivity.startActivity(i);
+            }
+        });
+
+        roda4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(myActivity.getApplicationContext(), Roda4Activity.class);
+                myActivity.startActivity(i);
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(myActivity.getApplicationContext(), AboutActivity.class);
+                myActivity.startActivity(i);
+            }
+        });
     }
 
     @Override
