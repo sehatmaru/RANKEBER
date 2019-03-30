@@ -17,4 +17,8 @@
     <string name="aturan_roda_2">Aturan Roda 2</string>
     <string name="rankeber">rankeber</string>
     <string name="aturan_kendaraan_bermotor">Aturan Kendaraan Bermotor</string>
+    <string name="aturan_kendaraan_roda_2">ATURAN KENDARAAN RODA 2</string>
+    <string name="aturan_kendaraan_roda_4">ATURAN KENDARAAN RODA 4</string>
+    <string name="tutup">Tutup</string>
+    <string name="register">Register</string>
 </resources>

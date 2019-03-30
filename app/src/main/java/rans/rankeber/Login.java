@@ -10,13 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import io.realm.Realm;
-import rans.rankeber.Realm.UserDB;
+import rans.rankeber.realm.UserDB;
+import rans.rankeber.realm.UserDBLog;
 
 public class Login extends AppCompatActivity {
 
     Realm realm;
     EditText username, password;
     CoordinatorLayout coordinatorLayout;
+
+    UserDB userDB;
+
+    boolean users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +48,24 @@ public class Login extends AppCompatActivity {
         String strUser = username.getText().toString();
         String strPass = password.getText().toString();
 
-        if (strUser.equals("user") && strPass.equals("user")){
-            realm.beginTransaction();
-            UserDB user = realm.createObject(UserDB.class, "1");
-            user.setNama("Sehat Maruli Tua Samosir");
-            user.setNoHP("082367894080");
-            user.setEmail("sehatmaru@gmail.com");
-            realm.commitTransaction();
+        realm.beginTransaction();
+        userDB= realm.where(UserDB.class).equalTo("username", strUser).equalTo("password", strPass).findFirst();
+
+        if (userDB!=null){
+            UserDBLog user = realm.createObject(UserDBLog.class, "1");
+            user.setNama(userDB.getNama());
+            user.setNoHP(userDB.getNoHP());
+            user.setEmail(userDB.getEmail());
+            user.setUsername(userDB.getUsername());
+            user.setPassword(userDB.getPassword());
+            user.setRole(userDB.getRole());
 
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
-        }else{
+        } else{
             Snackbar.make(coordinatorLayout, "Username/password salah", 3000).show();
         }
+
+        realm.commitTransaction();
     }
 }

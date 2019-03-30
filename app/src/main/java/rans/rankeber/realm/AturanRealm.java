@@ -1,4 +1,4 @@
-package rans.rankeber.Realm;
+package rans.rankeber.realm;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -55,5 +55,15 @@ public class AturanRealm extends RealmObject {
 
     public void setKategori(int kategori) {
         this.kategori = kategori;
+    }
+
+    @Override
+    public String toString() {
+        return "AturanRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", judulAturan='" + judulAturan + '\'' +
+                ", isiAturan='" + isiAturan + '\'' +
+                ", kategori=" + kategori +
+                '}';
     }
 }

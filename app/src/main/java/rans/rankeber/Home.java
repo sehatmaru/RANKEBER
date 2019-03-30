@@ -13,38 +13,42 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 public class Home extends AppCompatActivity {
-    private Activity myActivity;
+
+    LinearLayout roda2;
+    LinearLayout roda4;
+    LinearLayout about;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        this.myActivity = this;
+        makeToast("Welcome to Rankeber");
 
-        LinearLayout roda2 = (LinearLayout) this.findViewById(R.id.roda2);
-        LinearLayout roda4 = (LinearLayout) this.findViewById(R.id.roda4);
-        LinearLayout about = (LinearLayout) this.findViewById(R.id.about);
+        roda2 = (LinearLayout) this.findViewById(R.id.roda2);
+        roda4 = (LinearLayout) this.findViewById(R.id.roda4);
+        about = (LinearLayout) this.findViewById(R.id.about);
 
         roda2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(myActivity.getApplicationContext(), AturanRoda2.class);
-                myActivity.startActivity(i);
+                Intent i = new Intent(getApplicationContext(), AturanRoda2.class);
+                startActivity(i);
             }
         });
 
         roda4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(myActivity.getApplicationContext(), AturanRoda4.class);
-                myActivity.startActivity(i);
+                Intent i = new Intent(getApplicationContext(), AturanRoda4.class);
+                startActivity(i);
             }
         });
 
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(myActivity.getApplicationContext(), About.class);
-                myActivity.startActivity(i);
+                Intent i = new Intent(getApplicationContext(), About.class);
+                startActivity(i);
             }
         });
     }
@@ -87,5 +91,9 @@ public class Home extends AppCompatActivity {
                 })
                 .build();
         dialog.show();
+    }
+
+    private void makeToast(String text){
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 }

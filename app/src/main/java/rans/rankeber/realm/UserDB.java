@@ -1,4 +1,4 @@
-package rans.rankeber.Realm;
+package rans.rankeber.realm;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -15,6 +15,7 @@ public class UserDB extends RealmObject {
     private String email;
     private String username;
     private String password;
+    private String role;
 
     public UserDB() {
     }
@@ -67,6 +68,14 @@ public class UserDB extends RealmObject {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "UserDB{" +
@@ -76,6 +85,7 @@ public class UserDB extends RealmObject {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

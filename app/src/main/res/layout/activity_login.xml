@@ -58,7 +58,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/lgnBtn"
@@ -68,6 +68,12 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:background="@color/colorPrimary"/>
+
+                <Button
+                    android:id="@+id/registBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register"/>
 
             </LinearLayout>
 
