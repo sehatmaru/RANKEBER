@@ -20,9 +20,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+                app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                android:contentDescription="@string/gambar_nama" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -47,9 +48,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+                app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                android:contentDescription="@string/gambar_no_hp" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -74,9 +76,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+                app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                android:contentDescription="@string/gambar_email" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -102,9 +105,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+                app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                android:contentDescription="@string/gambar_username" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -129,9 +133,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+                app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                android:contentDescription="@string/gambar_password" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

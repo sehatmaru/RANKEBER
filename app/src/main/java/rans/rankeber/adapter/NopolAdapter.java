@@ -1,6 +1,7 @@
 package rans.rankeber.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,24 +15,18 @@ import java.util.List;
 import rans.rankeber.R;
 import rans.rankeber.realm.NopolRealm;
 
-/**
- * Created by Sehat MT Samosir on 03/30/2019.
- */
-
 public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder> {
 
     private List<NopolRealm> listData;
-    private LayoutInflater layoutInflater;
-    public static Context mContext;
 
     public NopolAdapter(Context context, List<NopolRealm> listData) {
-        mContext = context;
         this.listData = listData;
-        layoutInflater = LayoutInflater.from(context);
+        LayoutInflater.from(context);
     }
 
+    @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_nopol, parent, false);
 
@@ -39,15 +34,20 @@ public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final NopolRealm nopolRealm = listData.get(position);
 
         holder.nopol.setText(nopolRealm.getNopol());
+        holder.nama.setText(nopolRealm.getNama());
+        holder.alamat.setText(nopolRealm.getAlamat());
 
-        if (nopolRealm.getKategori() == 1)
+        if (nopolRealm.getKategori() == 1){
             holder.gbr.setImageResource(R.drawable.ic_motorcycle_black_24dp);
-        else if(nopolRealm.getKategori() == 2)
+            holder.nopol.setText(R.string.motor);
+        } else if (nopolRealm.getKategori() == 2){
             holder.gbr.setImageResource(R.drawable.ic_car_black_24dp);
+            holder.nopol.setText(R.string.mobil);
+        }
     }
 
     @Override
@@ -59,15 +59,18 @@ public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder
         return position;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView nopol;
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView nopol, nama, alamat, kategori;
         ImageView gbr;
         CardView cardview;
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
-            nopol = (TextView) itemView.findViewById(R.id.nopol);
-            gbr = (ImageView) itemView.findViewById(R.id.gbr);
-            cardview = (CardView) itemView.findViewById(R.id.cardViewAturan);
+            nopol = itemView.findViewById(R.id.nopol);
+            nama = itemView.findViewById(R.id.nama);
+            alamat = itemView.findViewById(R.id.alamat);
+            kategori = itemView.findViewById(R.id.kategori);
+            gbr = itemView.findViewById(R.id.gbr);
+            cardview = itemView.findViewById(R.id.cardViewAturan);
         }
     }
     public void animateTo(List<NopolRealm> models) {
@@ -92,7 +95,7 @@ public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder
             }
         }
     }
-    public void addItem(int position, NopolRealm model) {
+    private void addItem(int position, NopolRealm model) {
         listData.add(position, model);
         notifyItemInserted(position);
     }
@@ -106,12 +109,12 @@ public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder
         }
     }
 
-    public void moveItem(int fromPosition, int toPosition) {
+    private void moveItem(int fromPosition, int toPosition) {
         final NopolRealm model = listData.remove(fromPosition);
         listData.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
     }
-    public void removeItem(int position) {
+    private void removeItem(int position) {
         listData.remove(position);
         notifyItemRemoved(position);
     }

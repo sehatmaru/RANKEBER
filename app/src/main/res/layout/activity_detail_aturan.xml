@@ -38,12 +38,14 @@
             android:textAlignment="center"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:text="Judul"/>
+            android:text="@string/judul"/>
 
         <ImageView
             android:id="@+id/gbr"
             android:layout_width="fill_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:src="@drawable/ic_motorcycle_black_24dp"
+            android:contentDescription="@string/gambar_aturan" />
 
         <TextView
             android:id="@+id/isi"
@@ -51,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:textAlignment="center"
-            android:text="Isi"
+            android:text="@string/isi"
             android:textSize="18sp"/>
 
     </LinearLayout>

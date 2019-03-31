@@ -3,24 +3,16 @@ package rans.rankeber.realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by sehatmaru on 31/03/2019.
- */
-
 public class NopolRealm extends RealmObject {
 
     @PrimaryKey
     private String hashId;
     private String nopol;
+    private String nama;
+    private String alamat;
     private int kategori;
 
     public NopolRealm() {
-    }
-
-    public NopolRealm(String hashId, String nopol, int kategori) {
-        this.hashId = hashId;
-        this.nopol = nopol;
-        this.kategori = kategori;
     }
 
     public String getHashId() {
@@ -39,6 +31,22 @@ public class NopolRealm extends RealmObject {
         this.nopol = nopol;
     }
 
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
     public int getKategori() {
         return kategori;
     }
@@ -52,6 +60,8 @@ public class NopolRealm extends RealmObject {
         return "NopolRealm{" +
                 "hashId='" + hashId + '\'' +
                 ", nopol='" + nopol + '\'' +
+                ", nama='" + nama + '\'' +
+                ", alamat='" + alamat + '\'' +
                 ", kategori=" + kategori +
                 '}';
     }

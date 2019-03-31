@@ -17,8 +17,8 @@
     <string name="aturan_roda_2">Aturan Roda 2</string>
     <string name="rankeber">rankeber</string>
     <string name="aturan_kendaraan_bermotor">Aturan Kendaraan Bermotor</string>
-    <string name="aturan_kendaraan_roda_2">ATURAN KENDARAAN RODA 2</string>
-    <string name="aturan_kendaraan_roda_4">ATURAN KENDARAAN RODA 4</string>
+    <string name="aturan_kendaraan_roda_2">Aturan Kendaraan Roda 2</string>
+    <string name="aturan_kendaraan_roda_4">Aturan Kendaraan Roda 4</string>
     <string name="tutup">Tutup</string>
     <string name="register">Register</string>
     <string name="nama">Nama</string>
@@ -27,4 +27,23 @@
     <string name="logout">Logout</string>
     <string name="title_exit">Exit Application</string>
     <string name="content_exit">Anda ingin keluar aplikasi ?</string>
+    <string name="judul">Judul</string>
+    <string name="isi">Isi</string>
+    <string name="gambar_aturan">Gambar Aturan</string>
+    <string name="gambar_aturan_2_roda">Gambar Aturan 2 Roda</string>
+    <string name="gambar_aturan_4_roda">Gambar Aturan 4 Roda</string>
+    <string name="gambar_tentang">Gambar Tentang</string>
+    <string name="gambar_nama">Gambar Nama</string>
+    <string name="gambar_no_hp">Gambar No HP</string>
+    <string name="gambar_email">Gambar Email</string>
+    <string name="gambar_password">Gambar Password</string>
+    <string name="gambar_username">Gambar Username</string>
+    <string name="gambar_nopol">Gambar Nopol</string>
+    <string name="nopol">Nopol</string>
+    <string name="gambar_alamat">Gambar Alamat</string>
+    <string name="alamat">Alamat</string>
+    <string name="gambar_kategori">Gambar Kategori</string>
+    <string name="ketegori">Ketegori</string>
+    <string name="motor">Motor</string>
+    <string name="mobil">Mobil</string>
 </resources>

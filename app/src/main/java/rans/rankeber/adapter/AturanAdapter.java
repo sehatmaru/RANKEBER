@@ -1,6 +1,7 @@
 package rans.rankeber.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,21 +15,15 @@ import java.util.List;
 import rans.rankeber.R;
 import rans.rankeber.realm.AturanRealm;
 
-/**
- * Created by Sehat MT Samosir on 03/30/2019.
- */
 
 public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHolder> {
 
     private List<AturanRealm> listData;
-    private LayoutInflater layoutInflater;
-    public static Context mContext;
     private OnClickAturanListener onClickAturan;
 
     public AturanAdapter(Context context, List<AturanRealm> listData, OnClickAturanListener onClick) {
-        mContext = context;
         this.listData = listData;
-        layoutInflater = LayoutInflater.from(context);
+        LayoutInflater.from(context);
         this.onClickAturan = onClick;
     }
 
@@ -36,8 +31,9 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         void OnClickAturan(String idAturan);
     }
 
+    @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_aturan, parent, false);
 
@@ -45,14 +41,12 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final AturanRealm aturanRoda2 = listData.get(position);
 
         holder.judul.setText(aturanRoda2.getJudulAturan());
 
-        holder.cardview.setOnClickListener(view -> {
-            onClickAturan.OnClickAturan(aturanRoda2.getHashId());
-        });
+        holder.cardview.setOnClickListener(view -> onClickAturan.OnClickAturan(aturanRoda2.getHashId()));
     }
 
     @Override
@@ -64,15 +58,15 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         return position;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView judul;
         ImageView gbr;
         CardView cardview;
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
-            judul = (TextView) itemView.findViewById(R.id.judul);
-            gbr = (ImageView) itemView.findViewById(R.id.gbr);
-            cardview = (CardView) itemView.findViewById(R.id.cardViewAturan);
+            judul = itemView.findViewById(R.id.judul);
+            gbr = itemView.findViewById(R.id.gbr);
+            cardview = itemView.findViewById(R.id.cardViewAturan);
         }
     }
     public void animateTo(List<AturanRealm> models) {
@@ -97,7 +91,7 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
             }
         }
     }
-    public void addItem(int position, AturanRealm model) {
+    private void addItem(int position, AturanRealm model) {
         listData.add(position, model);
         notifyItemInserted(position);
     }
@@ -111,12 +105,12 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         }
     }
 
-    public void moveItem(int fromPosition, int toPosition) {
+    private void moveItem(int fromPosition, int toPosition) {
         final AturanRealm model = listData.remove(fromPosition);
         listData.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
     }
-    public void removeItem(int position) {
+    private void removeItem(int position) {
         listData.remove(position);
         notifyItemRemoved(position);
     }

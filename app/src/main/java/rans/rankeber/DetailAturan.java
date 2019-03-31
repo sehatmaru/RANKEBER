@@ -2,13 +2,11 @@ package rans.rankeber;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import io.realm.Realm;
 import rans.rankeber.realm.AturanRealm;
@@ -37,9 +35,9 @@ public class DetailAturan extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
-        judul = (TextView) findViewById(R.id.judul);
-        isi = (TextView) findViewById(R.id.isi);
-        gbr = (ImageView) findViewById(R.id.gbr);
+        judul = findViewById(R.id.judul);
+        isi = findViewById(R.id.isi);
+        gbr = findViewById(R.id.gbr);
 
         checkLogUser();
         fillData();

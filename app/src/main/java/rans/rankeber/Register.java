@@ -1,5 +1,6 @@
 package rans.rankeber;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,23 +33,20 @@ public class Register extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
-        nama = (EditText) findViewById(R.id.input_nama);
-        noHP = (EditText) findViewById(R.id.input_noHP);
-        email = (EditText) findViewById(R.id.input_email);
-        username = (EditText) findViewById(R.id.input_username);
-        password = (EditText) findViewById(R.id.input_password);
-        btnRegister = (Button) findViewById(R.id.registBtn);
+        nama = findViewById(R.id.input_nama);
+        noHP = findViewById(R.id.input_noHP);
+        email = findViewById(R.id.input_email);
+        username = findViewById(R.id.input_username);
+        password = findViewById(R.id.input_password);
+        btnRegister = findViewById(R.id.registBtn);
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insertUser();
+        btnRegister.setOnClickListener(view -> {
+            insertUser();
 
-                makeToast("Berhasil mendaftar");
+            makeToast("Berhasil mendaftar");
 
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
         });
     }
 
@@ -77,7 +75,7 @@ public class Register extends AppCompatActivity {
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         return timeStamp + "" + salt.toString();
     }
 

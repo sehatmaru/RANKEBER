@@ -1,16 +1,12 @@
 package rans.rankeber;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -46,8 +42,8 @@ public class AturanRoda4 extends AppCompatActivity implements AturanAdapter.OnCl
 
         checkLogUser();
 
-        rcList = (RecyclerView) findViewById(R.id.rcList);
-        searchView = (SearchView) findViewById(R.id.simpleSearchView);
+        rcList = findViewById(R.id.rcList);
+        searchView = findViewById(R.id.simpleSearchView);
         linearLayoutManager = new LinearLayoutManager(this);
 
         populateData();
@@ -59,9 +55,7 @@ public class AturanRoda4 extends AppCompatActivity implements AturanAdapter.OnCl
     }
 
     private void populateData(){
-        realm.executeTransactionAsync(realm1 -> {
-            listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", 2).findAll());
-        }, () -> {
+        realm.executeTransactionAsync(realm1 -> listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", 2).findAll()), () -> {
             if (!listAturan.isEmpty()) {
                 aturanAdapter = new AturanAdapter(this, listAturan, this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(aturanAdapter);

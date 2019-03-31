@@ -3,10 +3,6 @@ package rans.rankeber.realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by sehatmaru on 13/03/2019.
- */
-
 public class AturanRealm extends RealmObject {
 
     @PrimaryKey
@@ -16,13 +12,6 @@ public class AturanRealm extends RealmObject {
     private int kategori;
 
     public AturanRealm() {
-    }
-
-    public AturanRealm(String hashId, String judulAturan, String isiAturan, int kategori) {
-        this.hashId = hashId;
-        this.judulAturan = judulAturan;
-        this.isiAturan = isiAturan;
-        this.kategori = kategori;
     }
 
     public String getHashId() {

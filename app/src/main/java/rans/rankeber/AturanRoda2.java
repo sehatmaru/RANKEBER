@@ -1,19 +1,16 @@
 package rans.rankeber;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joanzapata.iconify.widget.IconTextView;
@@ -52,10 +49,10 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
 
         checkLogUser();
 
-        rcList = (RecyclerView) findViewById(R.id.rcList);
-        searchView = (SearchView) findViewById(R.id.simpleSearchView);
+        rcList = findViewById(R.id.rcList);
+        searchView = findViewById(R.id.simpleSearchView);
         linearLayoutManager = new LinearLayoutManager(this);
-        spinner = (IconTextView) findViewById(R.id.spinnerIcon);
+        spinner = findViewById(R.id.spinnerIcon);
 
         spinner.setVisibility(View.VISIBLE);
         populateData();
@@ -67,9 +64,7 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
     }
 
     private void populateData(){
-        realm.executeTransactionAsync(realm1 -> {
-            listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", 1).findAll());
-        }, () -> {
+        realm.executeTransactionAsync(realm1 -> listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", 1).findAll()), () -> {
             if (!listAturan.isEmpty()) {
                 aturanAdapter = new AturanAdapter(this, listAturan, this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(aturanAdapter);
@@ -114,6 +109,7 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
         return filteredList;
     }
 
+    @SuppressLint("SetTextI18n")
     private void updateLayout(String status) {
         switch (status) {
             case Konstanta.LAYOUT_SUCCESS:

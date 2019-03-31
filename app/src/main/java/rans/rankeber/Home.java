@@ -1,9 +1,8 @@
 package rans.rankeber;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -21,12 +20,9 @@ import java.util.List;
 
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import rans.rankeber.adapter.AturanAdapter;
 import rans.rankeber.adapter.NopolAdapter;
-import rans.rankeber.realm.AturanRealm;
 import rans.rankeber.realm.NopolRealm;
 import rans.rankeber.realm.UserDBLog;
-import rans.rankeber.utils.Konstanta;
 
 public class Home extends AppCompatActivity {
 
@@ -43,6 +39,8 @@ public class Home extends AppCompatActivity {
     ScaleInAnimationAdapter scaleInAnimationAdapter;
     RecyclerView.LayoutManager linearLayoutManager;
 
+    String role = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,36 +51,30 @@ public class Home extends AppCompatActivity {
 
         checkLogUser();
 
-        roda2 = (LinearLayout) findViewById(R.id.roda2);
-        roda4 = (LinearLayout) findViewById(R.id.roda4);
-        about = (LinearLayout) findViewById(R.id.about);
-        rcList = (RecyclerView) findViewById(R.id.rcList);
-        searchView = (SearchView) findViewById(R.id.searchView);
+        roda2 = findViewById(R.id.roda2);
+        roda4 = findViewById(R.id.roda4);
+        about = findViewById(R.id.about);
+        rcList = findViewById(R.id.rcList);
+        searchView = findViewById(R.id.searchView);
         linearLayoutManager = new LinearLayoutManager(this);
 
-        roda2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), AturanRoda2.class);
-                startActivity(i);
-            }
+        roda2.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), AturanRoda2.class);
+            startActivity(i);
         });
 
-        roda4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), AturanRoda4.class);
-                startActivity(i);
-            }
+        roda4.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), AturanRoda4.class);
+            startActivity(i);
         });
 
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), About.class);
-                startActivity(i);
-            }
+        about.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), About.class);
+            startActivity(i);
         });
+
+        if (role.equals("user"))
+            searchView.setVisibility(View.GONE);
 
         populateData();
     }
@@ -141,6 +133,8 @@ public class Home extends AppCompatActivity {
             makeToast("Anda harus login terlebih dahulu");
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
+        } else{
+            role = userDBLog.getRole();
         }
         realm.commitTransaction();
     }
@@ -160,15 +154,12 @@ public class Home extends AppCompatActivity {
     }
 
     private void populateData(){
-        realm.executeTransactionAsync(realm1 -> {
-            listNopol = realm1.copyFromRealm(realm1.where(NopolRealm.class).findAll());
-        }, () -> {
+        realm.executeTransactionAsync(realm1 -> listNopol = realm1.copyFromRealm(realm1.where(NopolRealm.class).findAll()), () -> {
             if (!listNopol.isEmpty()) {
                 nopolAdapter = new NopolAdapter(this, listNopol);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(nopolAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
-                rcList.setVisibility(View.VISIBLE);
                 setSearchFunction();
             }
         });

@@ -15,11 +15,10 @@ import rans.rankeber.realm.UserDBLog;
 
 public class Splashscreen extends AppCompatActivity {
 
-    Realm realm;
-    UserDBLog user;
+    private Realm realm;
 
-    boolean logged;
-    String role = "";
+    private boolean logged;
+    private String role = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +32,23 @@ public class Splashscreen extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                final Intent intent;
-                insertUser();
-                insertNopol();
-                insertAturan();
-                checkUser();
-                if (logged){
-                    if (role.equals("user")){
-                        intent = new Intent(getApplicationContext(), Home.class);
-                        startActivity(intent);
-                    }
-                } else{
-                    intent = new Intent(getApplicationContext(), Login.class);
+        new Handler().postDelayed(() -> {
+            final Intent intent;
+            insertUser();
+            insertNopol();
+            insertAturan();
+            checkUser();
+            if (logged){
+                if (role.equals("user")){
+                    intent = new Intent(getApplicationContext(), Home.class);
                     startActivity(intent);
                 }
-
-                finish();
+            } else{
+                intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
             }
+
+            finish();
         }, 3000); //delay 3 detik
     }
 
@@ -69,6 +65,22 @@ public class Splashscreen extends AppCompatActivity {
             userDB.setUsername("user");
             userDB.setPassword("user");
             userDB.setRole("user");
+
+            UserDB userDB1 = realm.createObject(UserDB.class, "2");
+            userDB1.setNama("Admin");
+            userDB1.setEmail("-");
+            userDB1.setNoHP("-");
+            userDB1.setUsername("admin");
+            userDB1.setPassword("admin");
+            userDB1.setRole("admin");
+
+            UserDB userDB3 = realm.createObject(UserDB.class, "3");
+            userDB3.setNama("Petugas");
+            userDB3.setEmail("-");
+            userDB3.setNoHP("-");
+            userDB3.setUsername("petugas");
+            userDB3.setPassword("petugas");
+            userDB3.setRole("petugas");
         }
 
         realm.commitTransaction();
@@ -83,10 +95,14 @@ public class Splashscreen extends AppCompatActivity {
         if (nopolRealm==null){
             NopolRealm nopolRealm1 = realm.createObject(NopolRealm.class, "1");
             nopolRealm1.setNopol("BK 55 JO");
+            nopolRealm1.setNama("Sehat Maruli Tua Samosir");
+            nopolRealm1.setAlamat("Hinalang");
             nopolRealm1.setKategori(2);
 
             NopolRealm nopolRealm2 = realm.createObject(NopolRealm.class, "2");
             nopolRealm2.setNopol("BK 216 JD");
+            nopolRealm1.setNama("Fredrick Pardosi");
+            nopolRealm1.setAlamat("Gatot Subroto, Medan");
             nopolRealm2.setKategori(1);
         }
 
@@ -131,10 +147,10 @@ public class Splashscreen extends AppCompatActivity {
 
     public void checkUser(){
         realm.beginTransaction();
-        user = realm.where(UserDBLog.class).findFirst();
+        UserDBLog user = realm.where(UserDBLog.class).findFirst();
         realm.commitTransaction();
 
-        if (user!=null)
+        if (user !=null)
             role = user.getRole();
 
         logged = user != null;
