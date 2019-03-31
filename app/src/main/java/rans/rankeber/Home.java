@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,21 +15,50 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import io.realm.Realm;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import rans.rankeber.adapter.AturanAdapter;
+import rans.rankeber.adapter.NopolAdapter;
+import rans.rankeber.realm.AturanRealm;
+import rans.rankeber.realm.NopolRealm;
+import rans.rankeber.realm.UserDBLog;
+import rans.rankeber.utils.Konstanta;
+
 public class Home extends AppCompatActivity {
 
     LinearLayout roda2;
     LinearLayout roda4;
     LinearLayout about;
+    RecyclerView rcList;
+    SearchView searchView;
+
+    List<NopolRealm> listNopol = Collections.EMPTY_LIST;
+    Realm realm;
+    UserDBLog userDBLog;
+    NopolAdapter nopolAdapter;
+    ScaleInAnimationAdapter scaleInAnimationAdapter;
+    RecyclerView.LayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        makeToast("Welcome to Rankeber");
 
-        roda2 = (LinearLayout) this.findViewById(R.id.roda2);
-        roda4 = (LinearLayout) this.findViewById(R.id.roda4);
-        about = (LinearLayout) this.findViewById(R.id.about);
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
+
+        checkLogUser();
+
+        roda2 = (LinearLayout) findViewById(R.id.roda2);
+        roda4 = (LinearLayout) findViewById(R.id.roda4);
+        about = (LinearLayout) findViewById(R.id.about);
+        rcList = (RecyclerView) findViewById(R.id.rcList);
+        searchView = (SearchView) findViewById(R.id.searchView);
+        linearLayoutManager = new LinearLayoutManager(this);
 
         roda2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +83,8 @@ public class Home extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        populateData();
     }
 
     @Override
@@ -71,10 +105,15 @@ public class Home extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        logoutDialog();
+    }
+
     private void signOut(){
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
-        Toast.makeText(this, "Logout Successfully", Toast.LENGTH_LONG).show();
+        makeToast("Berhasil Logout");
     }
 
     private void logoutDialog() {
@@ -84,6 +123,7 @@ public class Home extends AppCompatActivity {
                 .positiveText(R.string.yes)
                 .negativeText(R.string.no)
                 .onPositive((dialog1, which) -> {
+                    clearLogUser();
                     signOut();
                 })
                 .onNegative((dialog1, which) -> {
@@ -93,7 +133,74 @@ public class Home extends AppCompatActivity {
         dialog.show();
     }
 
+    private void checkLogUser(){
+        realm.beginTransaction();
+        UserDBLog userDBLog = realm.where(UserDBLog.class).findFirst();
+
+        if (userDBLog == null){
+            makeToast("Anda harus login terlebih dahulu");
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+        }
+        realm.commitTransaction();
+    }
+
     private void makeToast(String text){
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void clearLogUser(){
+        realm.beginTransaction();
+        userDBLog = realm.where(UserDBLog.class).findFirst();
+
+        if (userDBLog != null)
+            userDBLog.deleteFromRealm();
+
+        realm.commitTransaction();
+    }
+
+    private void populateData(){
+        realm.executeTransactionAsync(realm1 -> {
+            listNopol = realm1.copyFromRealm(realm1.where(NopolRealm.class).findAll());
+        }, () -> {
+            if (!listNopol.isEmpty()) {
+                nopolAdapter = new NopolAdapter(this, listNopol);
+                scaleInAnimationAdapter = new ScaleInAnimationAdapter(nopolAdapter);
+                rcList.setAdapter(scaleInAnimationAdapter);
+                rcList.setLayoutManager(linearLayoutManager);
+                rcList.setVisibility(View.VISIBLE);
+                setSearchFunction();
+            }
+        });
+    }
+
+    private void setSearchFunction() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<NopolRealm> filteredList = filter(newText);
+                nopolAdapter.animateTo(filteredList);
+                rcList.scrollToPosition(0);
+
+                return true;
+            }
+        });
+    }
+
+    private List<NopolRealm> filter(String query) {
+        query = query.toLowerCase();
+        final List<NopolRealm> filteredList = new ArrayList<>();
+        for (NopolRealm konten : realm.where(NopolRealm.class).findAll()) {
+            final String text = konten.getNopol().toLowerCase();
+            if (text.contains(query)) {
+                filteredList.add(konten);
+            }
+        }
+        return filteredList;
     }
 }

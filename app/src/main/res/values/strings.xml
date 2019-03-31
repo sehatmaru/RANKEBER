@@ -21,4 +21,10 @@
     <string name="aturan_kendaraan_roda_4">ATURAN KENDARAAN RODA 4</string>
     <string name="tutup">Tutup</string>
     <string name="register">Register</string>
+    <string name="nama">Nama</string>
+    <string name="nomor_hp">Nomor HP</string>
+    <string name="email">Email</string>
+    <string name="logout">Logout</string>
+    <string name="title_exit">Exit Application</string>
+    <string name="content_exit">Anda ingin keluar aplikasi ?</string>
 </resources>

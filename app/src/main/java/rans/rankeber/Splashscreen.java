@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import io.realm.Realm;
 import rans.rankeber.realm.AturanRealm;
+import rans.rankeber.realm.NopolRealm;
 import rans.rankeber.realm.UserDB;
 import rans.rankeber.realm.UserDBLog;
 
@@ -37,6 +38,7 @@ public class Splashscreen extends AppCompatActivity {
             public void run() {
                 final Intent intent;
                 insertUser();
+                insertNopol();
                 insertAturan();
                 checkUser();
                 if (logged){
@@ -67,6 +69,25 @@ public class Splashscreen extends AppCompatActivity {
             userDB.setUsername("user");
             userDB.setPassword("user");
             userDB.setRole("user");
+        }
+
+        realm.commitTransaction();
+        finish();
+    }
+
+    private void insertNopol(){
+        realm.beginTransaction();
+
+        NopolRealm nopolRealm = realm.where(NopolRealm.class).equalTo("hashId", "1").findFirst();
+
+        if (nopolRealm==null){
+            NopolRealm nopolRealm1 = realm.createObject(NopolRealm.class, "1");
+            nopolRealm1.setNopol("BK 55 JO");
+            nopolRealm1.setKategori(2);
+
+            NopolRealm nopolRealm2 = realm.createObject(NopolRealm.class, "2");
+            nopolRealm2.setNopol("BK 216 JD");
+            nopolRealm2.setKategori(1);
         }
 
         realm.commitTransaction();

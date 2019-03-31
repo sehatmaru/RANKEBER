@@ -1,6 +1,7 @@
 package rans.rankeber;
 
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -9,11 +10,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -25,6 +26,7 @@ import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import rans.rankeber.adapter.AturanAdapter;
 import rans.rankeber.realm.AturanRealm;
+import rans.rankeber.realm.UserDBLog;
 import rans.rankeber.utils.Konstanta;
 
 public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnClickAturanListener{
@@ -43,10 +45,12 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aturanroda2);
+        setContentView(R.layout.activity_aturan_roda_2);
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
+
+        checkLogUser();
 
         rcList = (RecyclerView) findViewById(R.id.rcList);
         searchView = (SearchView) findViewById(R.id.simpleSearchView);
@@ -59,35 +63,7 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
 
     @Override
     public void OnClickAturan(String idAturan) {
-        createDialog(idAturan);
-    }
-
-    private void createDialog(String idAturan){
-        realm.beginTransaction();
-        AturanRealm aturan = realm.where(AturanRealm.class).equalTo("hashId", idAturan).findFirst();
-        realm.commitTransaction();
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.dialog_aturan, null);
-        dialogBuilder.setView(dialogView);
-
-        final TextView txtJudul = dialogView.findViewById(R.id.judul);
-        final TextView txtIsi = dialogView.findViewById(R.id.isi);
-        final Button btnTutup = dialogView.findViewById(R.id.tutupBtn);
-
-        txtJudul.setText(aturan.getJudulAturan());
-        txtIsi.setText(aturan.getIsiAturan());
-
-        btnTutup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
+        startActivity(DetailAturan.createIntent(getApplicationContext(), idAturan));
     }
 
     private void populateData(){
@@ -163,5 +139,21 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
 
     private Snackbar createSnackbar(String message) {
         return Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE);
+    }
+
+    private void checkLogUser(){
+        realm.beginTransaction();
+        UserDBLog userDBLog = realm.where(UserDBLog.class).findFirst();
+
+        if (userDBLog == null){
+            makeToast("Anda harus login terlebih dahulu");
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+        }
+        realm.commitTransaction();
+    }
+
+    private void makeToast(String text){
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 }

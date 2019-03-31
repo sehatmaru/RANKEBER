@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import io.realm.Realm;
 import rans.rankeber.realm.UserDB;
@@ -18,6 +21,7 @@ public class Login extends AppCompatActivity {
     Realm realm;
     EditText username, password;
     CoordinatorLayout coordinatorLayout;
+    Button btnLogin, btnRegister;
 
     UserDB userDB;
 
@@ -34,14 +38,30 @@ public class Login extends AppCompatActivity {
         username = (EditText) findViewById(R.id.usernameField);
         password = (EditText) findViewById(R.id.passwordField);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        btnLogin = (Button) findViewById(R.id.lgnBtn);
+        btnRegister = (Button) findViewById(R.id.registBtn);
 
-        Button btnLogin = (Button) findViewById(R.id.lgnBtn);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginUser();
             }
         });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Register.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), Splashscreen.class);
+        startActivity(intent);
     }
 
     private void loginUser(){
