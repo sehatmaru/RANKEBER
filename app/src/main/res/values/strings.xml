@@ -46,4 +46,11 @@
     <string name="ketegori">Ketegori</string>
     <string name="motor">Motor</string>
     <string name="mobil">Mobil</string>
+    <string name="school">Universitas Methodist Indonesia</string>
+    <string name="tentang"></string>
+    <string name="nohp">08237746336</string>
+    <string name="name">Musa Andrivel T Silalahi</string>
+    <string name="gmail">musa@gmail.com</string>
+    <string name="nim">215518009</string>
+    <string name="deskripsi">Aplikasi ini menjelaskan tentang aturan kendaraan bermotor roda 2 dan roda 4 </string>
 </resources>

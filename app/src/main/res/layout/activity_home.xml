@@ -29,12 +29,27 @@
 
             <TextView
                 android:id="@+id/txtdashboard"
-                android:textSize="35sp"
+                android:textSize="28sp"
                 android:layout_marginTop="8dp"
                 android:text="@string/aturan_kendaraan_bermotor"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_below="@+id/txtdashboard"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                app:queryHint="Cari Nomor Polisi"
+                app:iconifiedByDefault="false"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
 
         </RelativeLayout>
         
@@ -122,8 +137,6 @@
         </GridLayout>
 
         <GridLayout
-            android:columnCount="1"
-            android:rowCount="1"
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false"
             android:layout_width="match_parent"
@@ -131,6 +144,7 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
@@ -143,7 +157,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="16dp"
+                    android:padding="30dp"
+                    android:weightSum="2"
                     android:gravity="center"
                     tools:ignore="UseCompoundDrawables">
 
@@ -167,19 +182,6 @@
 
         </GridLayout>
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
-            android:layout_height="wrap_content"
-            app:queryHint="Cari Nomor Polisi"
-            app:iconifiedByDefault="false"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
 
     </LinearLayout>
 

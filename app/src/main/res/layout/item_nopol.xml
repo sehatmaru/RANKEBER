@@ -22,12 +22,12 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                    app:srcCompat="@drawable/ic_format_list_numbered_black_24dp"
                     android:contentDescription="@string/gambar_nopol" />
 
                 <TextView
@@ -48,7 +48,7 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
@@ -73,12 +73,12 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                    app:srcCompat="@drawable/ic_location_on_black_24dp"
                     android:contentDescription="@string/gambar_alamat" />
 
                 <TextView
@@ -99,12 +99,12 @@
 
                 <ImageView
                     android:id="@+id/gbr"
-                    android:layout_width="30dp"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_account_circle_black_24dp"
+                    app:srcCompat="@drawable/ic_more_horiz_black_24dp"
                     android:contentDescription="@string/gambar_kategori" />
 
                 <TextView

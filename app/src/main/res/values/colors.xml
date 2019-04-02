@@ -6,4 +6,11 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="circle">#FFC107</color>
+    <color name="startblue">#299ED6</color>
+    <color name="endblue">#00BCD4</color>
+
+    <color name="loginPrimary">#3F51B5</color>
+    <color name="loginPrimaryDark">#303F9F</color>
+    <color name="loginAccent">#FF4081</color>
+    <color name="signupColor">#066e8a</color>
 </resources>
