@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/txtdashboard"
-                android:textSize="28sp"
+                android:textSize="25dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/aturan_kendaraan_bermotor"
                 android:textColor="@color/white"
@@ -40,7 +40,7 @@
                 android:id="@+id/searchView"
                 android:layout_below="@+id/txtdashboard"
                 android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:layout_height="wrap_content"
                 app:queryHint="Cari Nomor Polisi"
                 app:iconifiedByDefault="false"/>
@@ -156,26 +156,25 @@
                     android:id="@+id/about"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="30dp"
-                    android:weightSum="2"
                     android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="40dp"
+                    android:weightSum="2"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:src="@drawable/ic_info_black_24dp"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:contentDescription="@string/gambar_tentang" />
+                        android:contentDescription="@string/gambar_tentang"
+                        android:src="@drawable/ic_info_black_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:textColor="#6f6f6f"
-                        android:textSize="18sp"
                         android:text="@string/about"
-                        />
+                        android:textColor="#6f6f6f"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardViewAturan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:background="@drawable/framejudul"
             android:orientation="horizontal">
 
             <ImageView
@@ -20,7 +24,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:padding="6dp"
-                android:src="@mipmap/ic_launcher_round"/>
+                android:src="@drawable/helmet"/>
 
             <TextView
                 android:id="@+id/judul"
@@ -35,5 +39,4 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
-
 </android.support.constraint.ConstraintLayout>
