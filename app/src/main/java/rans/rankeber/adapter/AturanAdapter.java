@@ -10,14 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
+import io.realm.Realm;
 import rans.rankeber.R;
 import rans.rankeber.realm.AturanRealm;
 
 
 public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHolder> {
+    private Realm realm;
+    private AturanRealm aturanRealm;
 
+    private Context context;
     private List<AturanRealm> listData;
     private OnClickAturanListener onClickAturan;
 
@@ -25,6 +31,7 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         this.listData = listData;
         LayoutInflater.from(context);
         this.onClickAturan = onClick;
+        this.context = context;
     }
 
     public interface OnClickAturanListener {
@@ -37,16 +44,24 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_aturan, parent, false);
 
+        Realm.init(context);
+        realm = Realm.getDefaultInstance();
+
         return new MyViewHolder(itemView);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final AturanRealm aturanRoda2 = listData.get(position);
+        final AturanRealm aturan = listData.get(position);
 
-        holder.judul.setText(aturanRoda2.getJudulAturan());
+        holder.judul.setText(aturan.getJudul());
+        Glide.with(context).load(aturan.getImageURL()).into(holder.gbr);
 
-        holder.cardview.setOnClickListener(view -> onClickAturan.OnClickAturan(aturanRoda2.getHashId()));
+        holder.cardview.setOnClickListener(view -> {
+            onClickAturan.OnClickAturan(aturan.getImageURL());
+        });
     }
 
     @Override

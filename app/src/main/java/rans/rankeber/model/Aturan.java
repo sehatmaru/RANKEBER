@@ -1,19 +1,20 @@
-package rans.rankeber.realm;
+package rans.rankeber.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+/**
+ * Created by sehatmaru on 15/04/2019.
+ */
 
-public class AturanRealm extends RealmObject {
+public class Aturan {
 
     private String judul;
     private String isi;
     private String kategori;
     private String imageURL;
 
-    public AturanRealm() {
+    public Aturan() {
     }
 
-    public AturanRealm(String judul, String isi, String kategori, String imageURL) {
+    public Aturan(String judul, String isi, String kategori, String imageURL) {
         this.judul = judul;
         this.isi = isi;
         this.kategori = kategori;
@@ -54,7 +55,7 @@ public class AturanRealm extends RealmObject {
 
     @Override
     public String toString() {
-        return "AturanRealm{" +
+        return "Aturan{" +
                 "judul='" + judul + '\'' +
                 ", isi='" + isi + '\'' +
                 ", kategori='" + kategori + '\'' +

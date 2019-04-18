@@ -55,13 +55,12 @@ public class AturanRoda4 extends AppCompatActivity implements AturanAdapter.OnCl
     }
 
     private void populateData(){
-        realm.executeTransactionAsync(realm1 -> listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", 2).findAll()), () -> {
+        realm.executeTransactionAsync(realm1 -> listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", "2").findAll()), () -> {
             if (!listAturan.isEmpty()) {
                 aturanAdapter = new AturanAdapter(this, listAturan, this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(aturanAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
-                rcList.setVisibility(View.VISIBLE);
                 setSearchFunction();
             }
         });
@@ -88,8 +87,8 @@ public class AturanRoda4 extends AppCompatActivity implements AturanAdapter.OnCl
     private List<AturanRealm> filter(String query) {
         query = query.toLowerCase();
         final List<AturanRealm> filteredList = new ArrayList<>();
-        for (AturanRealm konten : realm.where(AturanRealm.class).equalTo("kategori", 2).findAll()) {
-            final String text = konten.getJudulAturan().toLowerCase();
+        for (AturanRealm konten : realm.where(AturanRealm.class).equalTo("kategori", "2").findAll()) {
+            final String text = konten.getJudul().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }

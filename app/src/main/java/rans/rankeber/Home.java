@@ -3,12 +3,15 @@ package rans.rankeber;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,6 +32,8 @@ public class Home extends AppCompatActivity {
     LinearLayout roda2;
     LinearLayout roda4;
     LinearLayout about;
+    LinearLayout admin;
+    CardView cardAdmin;
     RecyclerView rcList;
     SearchView searchView;
 
@@ -54,8 +59,10 @@ public class Home extends AppCompatActivity {
         roda2 = findViewById(R.id.roda2);
         roda4 = findViewById(R.id.roda4);
         about = findViewById(R.id.about);
+        admin = findViewById(R.id.admin);
         rcList = findViewById(R.id.rcList);
         searchView = findViewById(R.id.searchView);
+        cardAdmin = findViewById(R.id.cardAdmin);
         linearLayoutManager = new LinearLayoutManager(this);
 
         roda2.setOnClickListener(view -> {
@@ -73,8 +80,13 @@ public class Home extends AppCompatActivity {
             startActivity(i);
         });
 
+        admin.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), Admin.class);
+            startActivity(i);
+        });
+
         if (role.equals("user"))
-            searchView.setVisibility(View.GONE);
+            hideAdmin();
 
         populateData();
     }
@@ -192,6 +204,13 @@ public class Home extends AppCompatActivity {
                 filteredList.add(konten);
             }
         }
+        Log.e("bk", "" + filteredList.toString());
         return filteredList;
+    }
+
+    private void hideAdmin(){
+        searchView.setVisibility(View.GONE);
+        cardAdmin.setVisibility(View.GONE);
+        rcList.setVisibility(View.GONE);
     }
 }

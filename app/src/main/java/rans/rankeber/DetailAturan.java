@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import io.realm.Realm;
 import rans.rankeber.realm.AturanRealm;
 import rans.rankeber.realm.UserDBLog;
@@ -20,10 +22,10 @@ public class DetailAturan extends AppCompatActivity {
     AturanRealm aturanRealm;
     Realm realm;
 
-    private static String id;
+    private static String image;
 
-    public static Intent createIntent(Context context, String idProduk) {
-        id = idProduk;
+    public static Intent createIntent(Context context, String imageURL) {
+        image = imageURL;
         return new Intent(context, DetailAturan.class);
     }
 
@@ -57,11 +59,12 @@ public class DetailAturan extends AppCompatActivity {
 
     private void fillData(){
         realm.beginTransaction();
-        aturanRealm = realm.where(AturanRealm.class).equalTo("hashId", id).findFirst();
+        aturanRealm = realm.where(AturanRealm.class).equalTo("imageURL", image).findFirst();
 
         if (aturanRealm != null){
-            judul.setText(aturanRealm.getJudulAturan());
-            isi.setText(aturanRealm.getIsiAturan());
+            judul.setText(aturanRealm.getJudul());
+            isi.setText(aturanRealm.getIsi());
+            Glide.with(this).load(image).into(gbr);
         }
         realm.commitTransaction();
     }

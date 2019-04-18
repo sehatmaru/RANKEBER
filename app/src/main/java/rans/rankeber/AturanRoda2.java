@@ -22,6 +22,7 @@ import java.util.List;
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import rans.rankeber.adapter.AturanAdapter;
+import rans.rankeber.model.Aturan;
 import rans.rankeber.realm.AturanRealm;
 import rans.rankeber.realm.UserDBLog;
 import rans.rankeber.utils.Konstanta;
@@ -33,7 +34,6 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
     RecyclerView.LayoutManager linearLayoutManager;
     RecyclerView rcList;
     SearchView searchView;
-    IconTextView spinner;
     CoordinatorLayout coordinatorLayout;
 
     private List<AturanRealm> listAturan = Collections.EMPTY_LIST;
@@ -52,9 +52,7 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
         rcList = findViewById(R.id.rcList);
         searchView = findViewById(R.id.simpleSearchView);
         linearLayoutManager = new LinearLayoutManager(this);
-        spinner = findViewById(R.id.spinnerIcon);
 
-        spinner.setVisibility(View.VISIBLE);
         populateData();
     }
 
@@ -64,17 +62,13 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
     }
 
     private void populateData(){
-        realm.executeTransactionAsync(realm1 -> listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", 1).findAll()), () -> {
+        realm.executeTransactionAsync(realm1 -> listAturan = realm1.copyFromRealm(realm1.where(AturanRealm.class).equalTo("kategori", "1").findAll()), () -> {
             if (!listAturan.isEmpty()) {
                 aturanAdapter = new AturanAdapter(this, listAturan, this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(aturanAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
-                rcList.setVisibility(View.VISIBLE);
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
-            }else {
-                updateLayout(Konstanta.LAYOUT_EMPTY);
             }
         });
     }
@@ -100,41 +94,13 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
     private List<AturanRealm> filter(String query) {
         query = query.toLowerCase();
         final List<AturanRealm> filteredList = new ArrayList<>();
-        for (AturanRealm konten : realm.where(AturanRealm.class).equalTo("kategori", 1).findAll()) {
-            final String text = konten.getJudulAturan().toLowerCase();
+        for (AturanRealm konten : realm.where(AturanRealm.class).equalTo("kategori", "1").findAll()) {
+            final String text = konten.getJudul().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }
         }
         return filteredList;
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void updateLayout(String status) {
-        switch (status) {
-            case Konstanta.LAYOUT_SUCCESS:
-                spinner.setVisibility(View.GONE);
-                rcList.setVisibility(View.VISIBLE);
-                break;
-            case Konstanta.LAYOUT_EMPTY:
-                createSnackbar(Konstanta.LAYOUT_EMPTY).show();
-                spinner.setText("{fa-info 200%}  No data found");
-                break;
-            case Konstanta.LAYOUT_ERROR:
-                createSnackbar(Konstanta.LAYOUT_ERROR).show();
-                spinner.setText("{fa-info 200%} Error");
-                break;
-            case Konstanta.LAYOUT_LOADING:
-                rcList.setVisibility(View.GONE);
-                spinner.setVisibility(View.VISIBLE);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private Snackbar createSnackbar(String message) {
-        return Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE);
     }
 
     private void checkLogUser(){

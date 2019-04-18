@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AturanRoda2">
+    tools:context=".ListAturan">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,7 +28,7 @@
             android:layout_marginTop="15dp"
             android:textColor="@color/white"
             android:textAlignment="center"
-            android:text="@string/aturan_kendaraan_roda_2" />
+            android:text="@string/app_title" />
 
         <android.support.v7.widget.SearchView
             android:id="@+id/simpleSearchView"

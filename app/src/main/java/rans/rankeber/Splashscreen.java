@@ -1,13 +1,25 @@
 package rans.rankeber;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
+import rans.rankeber.model.Aturan;
 import rans.rankeber.realm.AturanRealm;
 import rans.rankeber.realm.NopolRealm;
 import rans.rankeber.realm.UserDB;
@@ -19,6 +31,11 @@ public class Splashscreen extends AppCompatActivity {
 
     private boolean logged;
     private String role = "";
+
+    DatabaseReference databaseReference;
+
+    List<Aturan> list = new ArrayList<>();
+    List<AturanRealm> listRealm = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +49,18 @@ public class Splashscreen extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
+        databaseReference = FirebaseDatabase.getInstance().getReference(Admin.DB_PATH);
+        deleteAturanRealm();
+        populateData();
+
         new Handler().postDelayed(() -> {
             final Intent intent;
             insertUser();
             insertNopol();
-            insertAturan();
+//            insertAturan();
             checkUser();
             if (logged){
-                if (role.equals("user")){
+                if (role != null){
                     intent = new Intent(getApplicationContext(), Home.class);
                     startActivity(intent);
                 }
@@ -101,8 +122,8 @@ public class Splashscreen extends AppCompatActivity {
 
             NopolRealm nopolRealm2 = realm.createObject(NopolRealm.class, "2");
             nopolRealm2.setNopol("BK 216 JD");
-            nopolRealm1.setNama("Fredrick Pardosi");
-            nopolRealm1.setAlamat("Gatot Subroto, Medan");
+            nopolRealm2.setNama("Fredrick Pardosi");
+            nopolRealm2.setAlamat("Gatot Subroto, Medan");
             nopolRealm2.setKategori(1);
         }
 
@@ -110,39 +131,44 @@ public class Splashscreen extends AppCompatActivity {
         finish();
     }
 
-    private void insertAturan(){
-        realm.beginTransaction();
+    private void insertRealm(List<Aturan> aturan){
+        for (int i=0; i<aturan.size(); i++){
+            realm.beginTransaction();
+            AturanRealm aturanRealm = realm.createObject(AturanRealm.class);
+            aturanRealm.setJudul(aturan.get(i).getJudul());
+            aturanRealm.setKategori(aturan.get(i).getKategori());
+            aturanRealm.setIsi(aturan.get(i).getIsi());
+            aturanRealm.setImageURL(aturan.get(i).getImageURL());
 
-        AturanRealm aturan = realm.where(AturanRealm.class).findFirst();
+            listRealm.add(aturanRealm);
 
-        /*
-            1 -> roda 2
-            2 -> roda 4
-         */
-        if (aturan==null){
-            AturanRealm aturanmotor1 = realm.createObject(AturanRealm.class, "1");
-            aturanmotor1.setJudulAturan("Wajib helm");
-            aturanmotor1.setIsiAturan("Pengendara wajib menggunakan helm, apapun yg terjadi, awas aja kalau ga pake helm, pecah kepalamu");
-            aturanmotor1.setKategori(1);
-
-            AturanRealm aturanmotor2 = realm.createObject(AturanRealm.class, "2");
-            aturanmotor2.setJudulAturan("Wajib spion");
-            aturanmotor2.setIsiAturan("Pengendara wajib memasang spion");
-            aturanmotor2.setKategori(1);
-
-            AturanRealm aturanmobil1 = realm.createObject(AturanRealm.class, "3");
-            aturanmobil1.setJudulAturan("Wajib Lampu");
-            aturanmobil1.setIsiAturan("Mobil harus menggunakan lampu dengan SNI");
-            aturanmobil1.setKategori(2);
-
-            AturanRealm aturanmobil2 = realm.createObject(AturanRealm.class, "4");
-            aturanmobil2.setJudulAturan("Wajib spion");
-            aturanmobil2.setIsiAturan("Mobil wajib dipasangi spion");
-            aturanmobil2.setKategori(2);
+            realm.commitTransaction();
         }
+        Log.e("realm ", "" + listRealm.size());
+    }
 
-        realm.commitTransaction();
-        finish();
+    private void populateData(){
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+
+                    Aturan aturan = postSnapshot.getValue(Aturan.class);
+
+                    list.add(aturan);
+                }
+
+                insertRealm(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                // Hiding the progress dialog.
+
+            }
+        });
     }
 
     public void checkUser(){
@@ -154,5 +180,12 @@ public class Splashscreen extends AppCompatActivity {
             role = user.getRole();
 
         logged = user != null;
+    }
+
+
+    private void deleteAturanRealm(){
+        realm.beginTransaction();
+        realm.where(AturanRealm.class).findAll().deleteAllFromRealm();
+        realm.commitTransaction();
     }
 }

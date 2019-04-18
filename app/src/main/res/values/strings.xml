@@ -28,7 +28,9 @@
     <string name="title_exit">Exit Application</string>
     <string name="content_exit">Anda ingin keluar aplikasi ?</string>
     <string name="judul">Penggunaan Helm pada roda 2</string>
+    <string name="juduls">Judul</string>
     <string name="isi">Para pengendara motor diwajibkan menggunakan helm saat mengendarai sepeda motor</string>
+    <string name="isis">Isi</string>
     <string name="gambar_aturan">Gambar Aturan</string>
     <string name="gambar_aturan_2_roda">Gambar Aturan 2 Roda</string>
     <string name="gambar_aturan_4_roda">Gambar Aturan 4 Roda</string>
@@ -47,10 +49,15 @@
     <string name="motor">Motor</string>
     <string name="mobil">Mobil</string>
     <string name="school">Universitas Methodist Indonesia</string>
-    <string name="tentang"></string>
+    <string name="tentang">About</string>
     <string name="nohp">08237746336</string>
     <string name="name">Musa Andrivel T Silalahi</string>
     <string name="gmail">musa@gmail.com</string>
     <string name="nim">215518009</string>
     <string name="deskripsi">Aplikasi ini menjelaskan tentang aturan kendaraan bermotor roda 2 dan roda 4 </string>
+    <string name="gambar_admin">Admin</string>
+    <string name="admin">Admin</string>
+    <string name="pilih_gambar">Pilih gambar</string>
+    <string name="tambah">Tambah</string>
+    <string name="list_aturan">List Aturan</string>
 </resources>
