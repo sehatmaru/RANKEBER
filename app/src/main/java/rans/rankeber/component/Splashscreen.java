@@ -19,6 +19,8 @@ import java.util.List;
 
 import io.realm.Realm;
 import rans.rankeber.R;
+import rans.rankeber.component.aturan.CreateAturan;
+import rans.rankeber.component.aturan.UpdateAturan;
 import rans.rankeber.dependencies.model.Aturan;
 import rans.rankeber.dependencies.realm.AturanRealm;
 import rans.rankeber.dependencies.realm.NopolRealm;
@@ -49,7 +51,7 @@ public class Splashscreen extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference(CRUAturan.DB_PATH);
+        databaseReference = FirebaseDatabase.getInstance().getReference(CreateAturan.DB_PATH);
         deleteAturanRealm();
         populateData();
 
@@ -118,13 +120,13 @@ public class Splashscreen extends AppCompatActivity {
             nopolRealm1.setNopol("BK 55 JO");
             nopolRealm1.setNama("Sehat Maruli Tua Samosir");
             nopolRealm1.setAlamat("Hinalang");
-            nopolRealm1.setKategori(2);
+            nopolRealm1.setKategori("2");
 
             NopolRealm nopolRealm2 = realm.createObject(NopolRealm.class, "2");
             nopolRealm2.setNopol("BK 216 JD");
             nopolRealm2.setNama("Fredrick Pardosi");
             nopolRealm2.setAlamat("Gatot Subroto, Medan");
-            nopolRealm2.setKategori(1);
+            nopolRealm2.setKategori("1");
         }
 
         realm.commitTransaction();

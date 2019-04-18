@@ -1,9 +1,10 @@
-package rans.rankeber.component;
+package rans.rankeber.component.aturan;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 
 import io.realm.Realm;
 import rans.rankeber.R;
+import rans.rankeber.component.Login;
 import rans.rankeber.dependencies.realm.AturanRealm;
 import rans.rankeber.dependencies.realm.UserDBLog;
 
@@ -19,6 +21,7 @@ public class DetailAturan extends AppCompatActivity {
 
     TextView judul, isi;
     ImageView gbr;
+    Button btnUpdate, btnDelete;
 
     AturanRealm aturanRealm;
     Realm realm;
@@ -41,6 +44,8 @@ public class DetailAturan extends AppCompatActivity {
         judul = findViewById(R.id.judul);
         isi = findViewById(R.id.isi);
         gbr = findViewById(R.id.gbr);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        btnDelete = findViewById(R.id.btnDelete);
 
         checkLogUser();
         fillData();

@@ -10,7 +10,7 @@ public class NopolRealm extends RealmObject {
     private String nopol;
     private String nama;
     private String alamat;
-    private int kategori;
+    private String kategori;
 
     public NopolRealm() {
     }
@@ -47,11 +47,11 @@ public class NopolRealm extends RealmObject {
         this.alamat = alamat;
     }
 
-    public int getKategori() {
+    public String getKategori() {
         return kategori;
     }
 
-    public void setKategori(int kategori) {
+    public void setKategori(String kategori) {
         this.kategori = kategori;
     }
 

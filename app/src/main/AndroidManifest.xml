@@ -24,13 +24,17 @@
         <activity android:name=".component.Login" />
         <activity android:name=".component.Home" />
         <activity android:name=".component.About" />
-        <activity android:name=".component.AturanRoda2" />
-        <activity android:name=".component.AturanRoda4" />
+        <activity android:name=".component.aturan.AturanRoda2" />
+        <activity android:name=".component.aturan.AturanRoda4" />
         <activity android:name=".component.Register" />
-        <activity android:name=".component.DetailAturan" />
+        <activity android:name=".component.aturan.DetailAturan" />
         <activity android:name=".component.Admin" />
-        <activity android:name=".component.ListAturan" />
-        <activity android:name=".component.CRUAturan"></activity>
+        <activity android:name=".component.aturan.ListAturan" />
+        <activity android:name=".component.aturan.UpdateAturan" />
+        <activity android:name=".component.nopol.UpdateNopol" />
+        <activity android:name=".component.nopol.ListNopol" />
+        <activity android:name=".component.aturan.CreateAturan" />
+        <activity android:name=".component.nopol.CreateNopol"></activity>
     </application>
 
 </manifest>

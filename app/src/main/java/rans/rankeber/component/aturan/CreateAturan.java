@@ -1,4 +1,4 @@
-package rans.rankeber.component;
+package rans.rankeber.component.aturan;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -29,8 +29,7 @@ import rans.rankeber.R;
 import rans.rankeber.dependencies.enums.Kategori;
 import rans.rankeber.dependencies.model.Aturan;
 
-public class CRUAturan extends AppCompatActivity {
-
+public class CreateAturan extends AppCompatActivity {
     Realm realm;
 
     EditText judulInput, isiInput;
@@ -46,12 +45,12 @@ public class CRUAturan extends AppCompatActivity {
     DatabaseReference databaseReference;
 
     String STORAGE_PATH = "image_upload/";
-    static String DB_PATH = "aturan_db";
+    public static String DB_PATH = "aturan_db";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cruaturan);
+        setContentView(R.layout.activity_create_aturan);
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();

@@ -1,4 +1,4 @@
-package rans.rankeber.component;
+package rans.rankeber.component.aturan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import java.util.List;
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import rans.rankeber.R;
+import rans.rankeber.component.Login;
 import rans.rankeber.component.adapter.AturanAdapter;
 import rans.rankeber.dependencies.realm.AturanRealm;
 import rans.rankeber.dependencies.realm.UserDBLog;
@@ -41,7 +42,7 @@ public class ListAturan extends AppCompatActivity implements AturanAdapter.OnCli
         recyclerView = findViewById(R.id.rcList);
         searchView = findViewById(R.id.simpleSearchView);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(ListAturan.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         populateData();
     }

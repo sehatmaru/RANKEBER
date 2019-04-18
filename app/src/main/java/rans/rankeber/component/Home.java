@@ -24,10 +24,12 @@ import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import rans.rankeber.R;
 import rans.rankeber.component.adapter.NopolAdapter;
+import rans.rankeber.component.aturan.AturanRoda2;
+import rans.rankeber.component.aturan.AturanRoda4;
 import rans.rankeber.dependencies.realm.NopolRealm;
 import rans.rankeber.dependencies.realm.UserDBLog;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements NopolAdapter.OnClickNopolListener {
 
     LinearLayout roda2;
     LinearLayout roda4;
@@ -168,7 +170,7 @@ public class Home extends AppCompatActivity {
     private void populateData(){
         realm.executeTransactionAsync(realm1 -> listNopol = realm1.copyFromRealm(realm1.where(NopolRealm.class).findAll()), () -> {
             if (!listNopol.isEmpty()) {
-                nopolAdapter = new NopolAdapter(this, listNopol);
+                nopolAdapter = new NopolAdapter(this, listNopol, this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(nopolAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
@@ -212,5 +214,10 @@ public class Home extends AppCompatActivity {
         searchView.setVisibility(View.GONE);
         cardAdmin.setVisibility(View.GONE);
         rcList.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void OnClickNopol(String idNopol) {
+
     }
 }

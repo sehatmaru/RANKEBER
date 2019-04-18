@@ -1,4 +1,4 @@
-package rans.rankeber.component;
+package rans.rankeber.component.aturan;
 
 
 import android.content.Intent;
@@ -16,6 +16,7 @@ import java.util.List;
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import rans.rankeber.R;
+import rans.rankeber.component.Login;
 import rans.rankeber.component.adapter.AturanAdapter;
 import rans.rankeber.dependencies.realm.AturanRealm;
 import rans.rankeber.dependencies.realm.UserDBLog;

@@ -4,61 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rans.rankeber.component.DetailAturan">
+    tools:context="rans.rankeber.component.aturan.DetailAturan">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:text="@string/aturan_kendaraan_bermotor" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/judul"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="@string/aturan_kendaraan_bermotor" />
+
+            <TextView
+                android:id="@+id/judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginLeft="6dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:background="@drawable/framejudul"
+                android:textColor="@color/black"
+                android:text="@string/judul"/>
+
+            <ImageView
+                android:id="@+id/gbr"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/helmet"
+                android:contentDescription="@string/gambar_aturan" />
+
+            <TextView
+                android:id="@+id/isi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:textAlignment="center"
+                android:background="@drawable/framejudul"
+                android:text="@string/isi"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginLeft="6dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:background="@drawable/framejudul"
-            android:textColor="@color/black"
-            android:text="@string/judul"/>
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
 
-        <ImageView
-            android:id="@+id/gbr"
-            android:layout_width="fill_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/helmet"
-            android:contentDescription="@string/gambar_aturan" />
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/update" />
 
-        <TextView
-            android:id="@+id/isi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:textAlignment="center"
-            android:background="@drawable/framejudul"
-            android:text="@string/isi"
-            android:textSize="18sp"/>
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hapus" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

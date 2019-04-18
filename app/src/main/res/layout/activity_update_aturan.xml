@@ -3,24 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rans.rankeber.component.CRUAturan">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="rans.rankeber.component.aturan.UpdateAturan">
 
-    <ProgressBar
-        android:id="@+id/myProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:indeterminateBehavior="cycle"
-        android:visibility="gone" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="@string/ubah_aturan" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_below="@id/textView"
             android:orientation="vertical">
 
             <TextView
@@ -79,7 +90,7 @@
                 android:id="@+id/btnTambah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tambah"/>
+                android:text="@string/simpan"/>
 
         </LinearLayout>
 

@@ -18,10 +18,16 @@ import rans.rankeber.dependencies.realm.NopolRealm;
 public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder> {
 
     private List<NopolRealm> listData;
+    private OnClickNopolListener onClickNopol;
 
-    public NopolAdapter(Context context, List<NopolRealm> listData) {
+    public NopolAdapter(Context context, List<NopolRealm> listData, OnClickNopolListener onClick) {
         this.listData = listData;
         LayoutInflater.from(context);
+        this.onClickNopol = onClick;
+    }
+
+    public interface OnClickNopolListener {
+        void OnClickNopol(String idNopol);
     }
 
     @NonNull
@@ -41,13 +47,15 @@ public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder
         holder.nama.setText(nopolRealm.getNama());
         holder.alamat.setText(nopolRealm.getAlamat());
 
-        if (nopolRealm.getKategori() == 1){
+        if (nopolRealm.getKategori().equals("1")){
             holder.gbr.setImageResource(R.drawable.ic_motorcycle_black_24dp);
-            holder.nopol.setText(R.string.motor);
-        } else if (nopolRealm.getKategori() == 2){
+            holder.kategori.setText(R.string.motor);
+        } else if (nopolRealm.getKategori().equals("2")){
             holder.gbr.setImageResource(R.drawable.ic_car_black_24dp);
-            holder.nopol.setText(R.string.mobil);
+            holder.kategori.setText(R.string.mobil);
         }
+
+        holder.cardview.setOnClickListener(view -> onClickNopol.OnClickNopol(nopolRealm.getHashId()));
     }
 
     @Override
@@ -70,7 +78,7 @@ public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder
             alamat = itemView.findViewById(R.id.alamat);
             kategori = itemView.findViewById(R.id.kategori);
             gbr = itemView.findViewById(R.id.gbr);
-            cardview = itemView.findViewById(R.id.cardViewAturan);
+            cardview = itemView.findViewById(R.id.cardViewNopol);
         }
     }
     public void animateTo(List<NopolRealm> models) {

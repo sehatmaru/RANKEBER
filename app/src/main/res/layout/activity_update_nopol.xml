@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rans.rankeber.component.nopol.UpdateNopol">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="@string/ubah_nopol" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_below="@id/textView"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/inputNopol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nopol"/>
+
+            <EditText
+                android:id="@+id/inputNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nama"/>
+
+            <EditText
+                android:id="@+id/inputAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/alamat"/>
+
+            <Spinner
+                android:id="@+id/inputKategori"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnTambah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/simpan"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_nopol"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
