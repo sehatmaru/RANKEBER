@@ -1,4 +1,4 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import io.realm.Realm;
-import rans.rankeber.realm.AturanRealm;
-import rans.rankeber.realm.UserDBLog;
+import rans.rankeber.R;
+import rans.rankeber.dependencies.realm.AturanRealm;
+import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class DetailAturan extends AppCompatActivity {
 

@@ -1,7 +1,6 @@
-package rans.rankeber.realm;
+package rans.rankeber.dependencies.realm;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 public class AturanRealm extends RealmObject {
 
@@ -11,13 +10,6 @@ public class AturanRealm extends RealmObject {
     private String imageURL;
 
     public AturanRealm() {
-    }
-
-    public AturanRealm(String judul, String isi, String kategori, String imageURL) {
-        this.judul = judul;
-        this.isi = isi;
-        this.kategori = kategori;
-        this.imageURL = imageURL;
     }
 
     public String getJudul() {

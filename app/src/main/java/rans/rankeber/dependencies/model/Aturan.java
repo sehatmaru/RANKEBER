@@ -1,8 +1,4 @@
-package rans.rankeber.model;
-
-/**
- * Created by sehatmaru on 15/04/2019.
- */
+package rans.rankeber.dependencies.model;
 
 public class Aturan {
 
@@ -25,32 +21,16 @@ public class Aturan {
         return judul;
     }
 
-    public void setJudul(String judul) {
-        this.judul = judul;
-    }
-
     public String getIsi() {
         return isi;
-    }
-
-    public void setIsi(String isi) {
-        this.isi = isi;
     }
 
     public String getKategori() {
         return kategori;
     }
 
-    public void setKategori(String kategori) {
-        this.kategori = kategori;
-    }
-
     public String getImageURL() {
         return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
     }
 
     @Override

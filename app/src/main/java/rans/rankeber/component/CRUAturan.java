@@ -1,4 +1,4 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -6,9 +6,9 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,11 +25,12 @@ import com.google.firebase.storage.StorageReference;
 import java.io.IOException;
 
 import io.realm.Realm;
-import rans.rankeber.enums.Kategori;
-import rans.rankeber.model.Aturan;
-import rans.rankeber.realm.AturanRealm;
+import rans.rankeber.R;
+import rans.rankeber.dependencies.enums.Kategori;
+import rans.rankeber.dependencies.model.Aturan;
 
-public class Admin extends AppCompatActivity {
+public class CRUAturan extends AppCompatActivity {
+
     Realm realm;
 
     EditText judulInput, isiInput;
@@ -50,7 +51,7 @@ public class Admin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_cruaturan);
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
@@ -66,7 +67,7 @@ public class Admin extends AppCompatActivity {
         btnGambar = findViewById(R.id.btnGbr);
         btnTambah = findViewById(R.id.btnTambah);
         btnList = findViewById(R.id.btnList);
-        progressDialog = new ProgressDialog(Admin.this);
+        progressDialog = new ProgressDialog(this);
 
         setSpinner();
 
@@ -104,23 +105,14 @@ public class Admin extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
             FilePathUri = data.getData();
 
             try {
-
-                // Getting selected image into Bitmap.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
-
-                // Setting up bitmap selected image into ImageView.
                 imageView.setImageBitmap(bitmap);
-
-                // After selecting image change choose button above text.
                 btnGambar.setText("Image Selected");
-
             }
             catch (IOException e) {
-
                 e.printStackTrace();
             }
         }
@@ -143,66 +135,48 @@ public class Admin extends AppCompatActivity {
         String isii = isiInput.getText().toString();
         int kategorii = kategoriSpinner.getSelectedItemPosition();
 
-        // Checking whether FilePathUri Is empty or not.
-        if (FilePathUri != null) {
+        if (FilePathUri != null && !judull.isEmpty() && !isii.isEmpty() && kategorii != 0) {
 
-            // Setting progressDialog Title.
             progressDialog.setTitle("Image is Uploading...");
-
-            // Showing progressDialog.
             progressDialog.show();
 
-            // Creating second StorageReference.
             StorageReference storageReference2nd = storageReference.child(STORAGE_PATH + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
 
-            // Adding addOnSuccessListener to second StorageReference.
             storageReference2nd.putFile(FilePathUri)
                     .addOnSuccessListener(taskSnapshot -> {
 
-                        // Getting image name from EditText and store into string variable.
                         String juduls = judulInput.getText().toString().trim();
                         String isis = isiInput.getText().toString().trim();
                         String kategoris = String.valueOf(kategoriSpinner.getSelectedItemPosition());
 
-                        // Hiding the progressDialog after done uploading.
                         progressDialog.dismiss();
 
-                        // Showing toast message after done uploading.
-                        Toast.makeText(getApplicationContext(), "Image Uploaded Successfully ", Toast.LENGTH_LONG).show();
+                        makeToast("Image Uploaded Successfully");
 
                         @SuppressWarnings("VisibleForTests")
                         Aturan aturan = new Aturan(juduls, isis, kategoris, taskSnapshot.getDownloadUrl().toString());
 
-                        // Getting image upload ID.
                         String ImageUploadId = databaseReference.push().getKey();
 
-                        // Adding image upload id s child element into databaseReference.
                         databaseReference.child(ImageUploadId).setValue(aturan);
 
                         clearText();
                     })
-                    // If something goes wrong .
                     .addOnFailureListener(exception -> {
-
-                        // Hiding the progressDialog.
                         progressDialog.dismiss();
-
-                        // Showing exception erro message.
-                        Toast.makeText(Admin.this, exception.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
                     })
 
-                    // On progress change upload time.
                     .addOnProgressListener(taskSnapshot -> {
-
-                        // Setting progressDialog Title.
                         progressDialog.setTitle("Image is Uploading...");
-
                     });
         }
         else {
-
-            Toast.makeText(Admin.this, "Please Select Image or Add Image Name", Toast.LENGTH_LONG).show();
-
+            makeToast("Please Select Image or Add Image Name");
         }
+    }
+
+    private void makeToast(String text){
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 }

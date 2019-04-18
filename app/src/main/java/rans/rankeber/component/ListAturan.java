@@ -1,30 +1,22 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import rans.rankeber.adapter.AturanAdapter;
-import rans.rankeber.model.Aturan;
-import rans.rankeber.realm.AturanRealm;
-import rans.rankeber.realm.UserDBLog;
+import rans.rankeber.R;
+import rans.rankeber.component.adapter.AturanAdapter;
+import rans.rankeber.dependencies.realm.AturanRealm;
+import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class ListAturan extends AppCompatActivity implements AturanAdapter.OnClickAturanListener {
 
@@ -34,9 +26,6 @@ public class ListAturan extends AppCompatActivity implements AturanAdapter.OnCli
     RecyclerView recyclerView;
     AturanAdapter adapter;
     ScaleInAnimationAdapter scaleInAnimationAdapter;
-
-    DatabaseReference databaseReference;
-    ProgressDialog progressDialog;
 
     List<AturanRealm> listAturan = new ArrayList<>();
 
@@ -51,13 +40,8 @@ public class ListAturan extends AppCompatActivity implements AturanAdapter.OnCli
 
         recyclerView = findViewById(R.id.rcList);
         searchView = findViewById(R.id.simpleSearchView);
-        progressDialog = new ProgressDialog(ListAturan.this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(ListAturan.this));
-
-        progressDialog.setMessage("Loading Images From Firebase.");
-
-        databaseReference = FirebaseDatabase.getInstance().getReference(Admin.DB_PATH);
 
         populateData();
     }

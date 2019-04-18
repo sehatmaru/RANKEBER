@@ -1,19 +1,13 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.view.View;
 import android.widget.Toast;
-
-import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,11 +15,10 @@ import java.util.List;
 
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import rans.rankeber.adapter.AturanAdapter;
-import rans.rankeber.model.Aturan;
-import rans.rankeber.realm.AturanRealm;
-import rans.rankeber.realm.UserDBLog;
-import rans.rankeber.utils.Konstanta;
+import rans.rankeber.R;
+import rans.rankeber.component.adapter.AturanAdapter;
+import rans.rankeber.dependencies.realm.AturanRealm;
+import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnClickAturanListener{
 
@@ -34,7 +27,6 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
     RecyclerView.LayoutManager linearLayoutManager;
     RecyclerView rcList;
     SearchView searchView;
-    CoordinatorLayout coordinatorLayout;
 
     private List<AturanRealm> listAturan = Collections.EMPTY_LIST;
     private ScaleInAnimationAdapter scaleInAnimationAdapter;

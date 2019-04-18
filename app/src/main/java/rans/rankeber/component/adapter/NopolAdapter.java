@@ -1,4 +1,4 @@
-package rans.rankeber.adapter;
+package rans.rankeber.component.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import rans.rankeber.R;
-import rans.rankeber.realm.NopolRealm;
+import rans.rankeber.dependencies.realm.NopolRealm;
 
 public class NopolAdapter extends RecyclerView.Adapter<NopolAdapter.MyViewHolder> {
 

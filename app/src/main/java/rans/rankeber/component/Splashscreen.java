@@ -1,6 +1,5 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -19,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import rans.rankeber.model.Aturan;
-import rans.rankeber.realm.AturanRealm;
-import rans.rankeber.realm.NopolRealm;
-import rans.rankeber.realm.UserDB;
-import rans.rankeber.realm.UserDBLog;
+import rans.rankeber.R;
+import rans.rankeber.dependencies.model.Aturan;
+import rans.rankeber.dependencies.realm.AturanRealm;
+import rans.rankeber.dependencies.realm.NopolRealm;
+import rans.rankeber.dependencies.realm.UserDB;
+import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class Splashscreen extends AppCompatActivity {
 
@@ -49,7 +49,7 @@ public class Splashscreen extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference(Admin.DB_PATH);
+        databaseReference = FirebaseDatabase.getInstance().getReference(CRUAturan.DB_PATH);
         deleteAturanRealm();
         populateData();
 

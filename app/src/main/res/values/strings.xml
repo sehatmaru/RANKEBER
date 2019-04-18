@@ -60,4 +60,5 @@
     <string name="pilih_gambar">Pilih gambar</string>
     <string name="tambah">Tambah</string>
     <string name="list_aturan">List Aturan</string>
+    <string name="aturan">Aturan</string>
 </resources>

@@ -14,22 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".Splashscreen">
+        <activity android:name=".component.Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".Home" />
-        <activity android:name=".About" />
-        <activity android:name=".AturanRoda2" />
-        <activity android:name=".AturanRoda4" />
-        <activity android:name=".Register" />
-        <activity android:name=".DetailAturan" />
-        <activity android:name=".Admin" />
-        <activity android:name=".ListAturan"></activity>
+        <activity android:name=".component.Login" />
+        <activity android:name=".component.Home" />
+        <activity android:name=".component.About" />
+        <activity android:name=".component.AturanRoda2" />
+        <activity android:name=".component.AturanRoda4" />
+        <activity android:name=".component.Register" />
+        <activity android:name=".component.DetailAturan" />
+        <activity android:name=".component.Admin" />
+        <activity android:name=".component.ListAturan" />
+        <activity android:name=".component.CRUAturan"></activity>
     </application>
 
 </manifest>

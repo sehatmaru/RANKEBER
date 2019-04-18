@@ -1,4 +1,4 @@
-package rans.rankeber.enums;
+package rans.rankeber.dependencies.enums;
 
 import java.util.HashMap;
 import java.util.Map;

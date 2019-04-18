@@ -4,7 +4,7 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
+    tools:context=".component.Login"
     android:orientation="vertical"
     android:background="@mipmap/back"
     android:gravity="center"

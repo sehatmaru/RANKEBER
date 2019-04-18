@@ -1,4 +1,4 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -23,9 +22,10 @@ import java.util.List;
 
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import rans.rankeber.adapter.NopolAdapter;
-import rans.rankeber.realm.NopolRealm;
-import rans.rankeber.realm.UserDBLog;
+import rans.rankeber.R;
+import rans.rankeber.component.adapter.NopolAdapter;
+import rans.rankeber.dependencies.realm.NopolRealm;
+import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class Home extends AppCompatActivity {
 

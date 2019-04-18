@@ -1,14 +1,14 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import io.realm.Realm;
-import rans.rankeber.realm.UserDBLog;
+import rans.rankeber.R;
+import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class About extends AppCompatActivity {
 

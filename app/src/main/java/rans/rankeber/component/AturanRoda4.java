@@ -1,4 +1,4 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,9 +14,10 @@ import java.util.List;
 
 import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import rans.rankeber.adapter.AturanAdapter;
-import rans.rankeber.realm.AturanRealm;
-import rans.rankeber.realm.UserDBLog;
+import rans.rankeber.R;
+import rans.rankeber.component.adapter.AturanAdapter;
+import rans.rankeber.dependencies.realm.AturanRealm;
+import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class AturanRoda4 extends AppCompatActivity implements AturanAdapter.OnClickAturanListener{
 

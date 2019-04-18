@@ -1,11 +1,10 @@
-package rans.rankeber;
+package rans.rankeber.component;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,7 +14,8 @@ import java.util.Date;
 import java.util.Random;
 
 import io.realm.Realm;
-import rans.rankeber.realm.UserDB;
+import rans.rankeber.R;
+import rans.rankeber.dependencies.realm.UserDB;
 
 public class Register extends AppCompatActivity {
 

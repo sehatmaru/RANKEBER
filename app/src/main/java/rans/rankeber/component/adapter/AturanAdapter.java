@@ -1,4 +1,4 @@
-package rans.rankeber.adapter;
+package rans.rankeber.component.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -14,14 +14,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import io.realm.Realm;
 import rans.rankeber.R;
-import rans.rankeber.realm.AturanRealm;
+import rans.rankeber.dependencies.realm.AturanRealm;
 
 
 public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHolder> {
-    private Realm realm;
-    private AturanRealm aturanRealm;
 
     private Context context;
     private List<AturanRealm> listData;
@@ -44,9 +41,6 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_aturan, parent, false);
 
-        Realm.init(context);
-        realm = Realm.getDefaultInstance();
-
         return new MyViewHolder(itemView);
     }
 
@@ -59,9 +53,7 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         holder.judul.setText(aturan.getJudul());
         Glide.with(context).load(aturan.getImageURL()).into(holder.gbr);
 
-        holder.cardview.setOnClickListener(view -> {
-            onClickAturan.OnClickAturan(aturan.getImageURL());
-        });
+        holder.cardview.setOnClickListener(view -> onClickAturan.OnClickAturan(aturan.getImageURL()));
     }
 
     @Override

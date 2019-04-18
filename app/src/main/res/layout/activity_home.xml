@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rans.rankeber.Home"
+    tools:context="rans.rankeber.component.Home"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp"
