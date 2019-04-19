@@ -4,12 +4,21 @@ import io.realm.RealmObject;
 
 public class AturanRealm extends RealmObject {
 
+    private String key;
     private String judul;
     private String isi;
     private String kategori;
     private String imageURL;
 
     public AturanRealm() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getJudul() {
@@ -47,7 +56,8 @@ public class AturanRealm extends RealmObject {
     @Override
     public String toString() {
         return "AturanRealm{" +
-                "judul='" + judul + '\'' +
+                "key='" + key + '\'' +
+                ", judul='" + judul + '\'' +
                 ", isi='" + isi + '\'' +
                 ", kategori='" + kategori + '\'' +
                 ", imageURL='" + imageURL + '\'' +

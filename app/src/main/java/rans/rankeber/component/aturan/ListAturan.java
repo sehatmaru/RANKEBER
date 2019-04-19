@@ -1,12 +1,21 @@
 package rans.rankeber.component.aturan;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +24,9 @@ import io.realm.Realm;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import rans.rankeber.R;
 import rans.rankeber.component.Login;
+import rans.rankeber.component.Splashscreen;
 import rans.rankeber.component.adapter.AturanAdapter;
+import rans.rankeber.dependencies.model.Aturan;
 import rans.rankeber.dependencies.realm.AturanRealm;
 import rans.rankeber.dependencies.realm.UserDBLog;
 
@@ -28,6 +39,8 @@ public class ListAturan extends AppCompatActivity implements AturanAdapter.OnCli
     AturanAdapter adapter;
     ScaleInAnimationAdapter scaleInAnimationAdapter;
 
+    DatabaseReference databaseReference;
+
     List<AturanRealm> listAturan = new ArrayList<>();
 
     @Override
@@ -37,6 +50,8 @@ public class ListAturan extends AppCompatActivity implements AturanAdapter.OnCli
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference(CreateAturan.DB_PATH);
+
         checkLogUser();
 
         recyclerView = findViewById(R.id.rcList);
@@ -48,8 +63,8 @@ public class ListAturan extends AppCompatActivity implements AturanAdapter.OnCli
     }
 
     @Override
-    public void OnClickAturan(String imageURL) {
-        startActivity(DetailAturan.createIntent(getApplicationContext(), imageURL));
+    public void OnClickAturan(String idAturan, String imageURL) {
+        startActivity(DetailAturan.createIntent(this, idAturan, imageURL));
     }
 
     private void checkLogUser(){
@@ -106,6 +121,8 @@ public class ListAturan extends AppCompatActivity implements AturanAdapter.OnCli
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(adapter);
                 recyclerView.setAdapter(scaleInAnimationAdapter);
                 setSearchFunction();
+
+                Log.e("size data", listAturan.size() + "");
             }
         });
     }

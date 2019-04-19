@@ -29,15 +29,15 @@ import rans.rankeber.dependencies.realm.UserDBLog;
 
 public class Splashscreen extends AppCompatActivity {
 
-    private Realm realm;
+    private static Realm realm;
 
     private boolean logged;
     private String role = "";
 
-    DatabaseReference databaseReference;
+    static DatabaseReference databaseReference;
 
-    List<Aturan> list = new ArrayList<>();
-    List<AturanRealm> listRealm = new ArrayList<>();
+    static List<Aturan> list = new ArrayList<>();
+    static List<AturanRealm> listRealm = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,10 +133,11 @@ public class Splashscreen extends AppCompatActivity {
         finish();
     }
 
-    private void insertRealm(List<Aturan> aturan){
+    public static void insertRealm(List<Aturan> aturan){
         for (int i=0; i<aturan.size(); i++){
             realm.beginTransaction();
             AturanRealm aturanRealm = realm.createObject(AturanRealm.class);
+            aturanRealm.setKey(aturan.get(i).getKey());
             aturanRealm.setJudul(aturan.get(i).getJudul());
             aturanRealm.setKategori(aturan.get(i).getKategori());
             aturanRealm.setIsi(aturan.get(i).getIsi());
@@ -149,7 +150,7 @@ public class Splashscreen extends AppCompatActivity {
         Log.e("realm ", "" + listRealm.size());
     }
 
-    private void populateData(){
+    public static void populateData(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -184,8 +185,7 @@ public class Splashscreen extends AppCompatActivity {
         logged = user != null;
     }
 
-
-    private void deleteAturanRealm(){
+    public static void deleteAturanRealm(){
         realm.beginTransaction();
         realm.where(AturanRealm.class).findAll().deleteAllFromRealm();
         realm.commitTransaction();

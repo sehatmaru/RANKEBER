@@ -1,52 +1,53 @@
 package rans.rankeber.component.aturan;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.MimeTypeMap;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import rans.rankeber.R;
 import rans.rankeber.dependencies.enums.Kategori;
 import rans.rankeber.dependencies.model.Aturan;
+import rans.rankeber.dependencies.realm.AturanRealm;
 
 public class UpdateAturan extends AppCompatActivity {
 
     Realm realm;
+    AturanRealm aturanRealm;
 
     EditText judulInput, isiInput;
-    Button btnGambar, btnTambah, btnList;
+    Button btnSimpan;
     Spinner kategoriSpinner;
-    ImageView imageView;
     ProgressDialog progressDialog;
 
-    Uri FilePathUri;
-    int Image_Request_Code = 7;
+    ArrayAdapter<Kategori> kategoris;
 
-    StorageReference storageReference;
     DatabaseReference databaseReference;
+    static String key, imageURL;
 
-    String STORAGE_PATH = "image_upload/";
     static String DB_PATH = "aturan_db";
+
+    public static Intent createIntent(Context context, String keys) {
+        key = keys;
+        return new Intent(context, UpdateAturan.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,40 +57,29 @@ public class UpdateAturan extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
-        storageReference = FirebaseStorage.getInstance().getReference();
-
         databaseReference = FirebaseDatabase.getInstance().getReference(DB_PATH);
 
         judulInput = findViewById(R.id.inputJudul);
         isiInput = findViewById(R.id.inputIsi);
         kategoriSpinner = findViewById(R.id.inputKategori);
-        imageView = findViewById(R.id.imageView);
-        btnGambar = findViewById(R.id.btnGbr);
-        btnTambah = findViewById(R.id.btnTambah);
-        btnList = findViewById(R.id.btnList);
+        btnSimpan = findViewById(R.id.btnSimpan);
         progressDialog = new ProgressDialog(this);
 
+        getRealmData();
+        setData();
         setSpinner();
 
-        btnGambar.setOnClickListener(view -> {
-            Intent intent = new Intent();
-
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
-        });
-
-        btnTambah.setOnClickListener(view -> UploadImageFileToFirebaseStorage());
-
-        btnList.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ListAturan.class);
-            startActivity(intent);
-        });
+        btnSimpan.setOnClickListener(view -> UploadImageFileToFirebaseStorage());
     }
 
     private void setSpinner(){
-        ArrayAdapter<Kategori> kategoris = new ArrayAdapter<>(this, R.layout.spinner_item, Kategori.values());
+        kategoris = new ArrayAdapter<>(this, R.layout.spinner_item, Kategori.values());
         kategoriSpinner.setAdapter(kategoris);
+    }
+
+    private void setData(){
+        judulInput.setText(aturanRealm.getJudul());
+        isiInput.setText(aturanRealm.getIsi());
     }
 
     private void clearText(){
@@ -98,85 +88,47 @@ public class UpdateAturan extends AppCompatActivity {
         kategoriSpinner.setSelection(0);
     }
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            FilePathUri = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
-                imageView.setImageBitmap(bitmap);
-                btnGambar.setText("Image Selected");
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    // Creating Method to get the selected image file Extension from File Path URI.
-    public String GetFileExtension(Uri uri) {
-
-        ContentResolver contentResolver = getContentResolver();
-
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-
-        // Returning the file Extension.
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)) ;
-
-    }
-
     public void UploadImageFileToFirebaseStorage() {
         String judull = judulInput.getText().toString();
         String isii = isiInput.getText().toString();
         int kategorii = kategoriSpinner.getSelectedItemPosition();
 
-        if (FilePathUri != null && !judull.isEmpty() && !isii.isEmpty() && kategorii != 0) {
+        if (!judull.isEmpty() && !isii.isEmpty() && kategorii != 0) {
 
-            progressDialog.setTitle("Image is Uploading...");
+            progressDialog.setTitle("Updating data");
             progressDialog.show();
 
-            StorageReference storageReference2nd = storageReference.child(STORAGE_PATH + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+            progressDialog.dismiss();
 
-            storageReference2nd.putFile(FilePathUri)
-                    .addOnSuccessListener(taskSnapshot -> {
+            makeToast("Data updated successfully");
 
-                        String juduls = judulInput.getText().toString().trim();
-                        String isis = isiInput.getText().toString().trim();
-                        String kategoris = String.valueOf(kategoriSpinner.getSelectedItemPosition());
+            @SuppressWarnings("VisibleForTests")
+            Aturan aturan = new Aturan(key, judull, isii, String.valueOf(kategorii), imageURL);
 
-                        progressDialog.dismiss();
+            databaseReference.child(key).setValue(aturan);
 
-                        makeToast("Image Uploaded Successfully");
-
-                        @SuppressWarnings("VisibleForTests")
-                        Aturan aturan = new Aturan(juduls, isis, kategoris, taskSnapshot.getDownloadUrl().toString());
-
-                        String ImageUploadId = databaseReference.push().getKey();
-
-                        databaseReference.child(ImageUploadId).setValue(aturan);
-
-                        clearText();
-                    })
-                    .addOnFailureListener(exception -> {
-                        progressDialog.dismiss();
-                        Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
-                    })
-
-                    .addOnProgressListener(taskSnapshot -> {
-                        progressDialog.setTitle("Image is Uploading...");
-                    });
+            clearText();
+            toAturan();
         }
         else {
-            makeToast("Please Select Image or Add Image Name");
+            makeToast("Harap isi semua data");
         }
     }
 
     private void makeToast(String text){
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void getRealmData(){
+        realm.beginTransaction();
+        aturanRealm = realm.where(AturanRealm.class).equalTo("key", key).findFirst();
+        imageURL = aturanRealm.getImageURL();
+        realm.commitTransaction();
+    }
+
+    private void toAturan(){
+        finish();
+        Intent intent = new Intent(this, CreateAturan.class);
+        startActivity(intent);
     }
 }

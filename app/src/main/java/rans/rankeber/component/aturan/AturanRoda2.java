@@ -50,8 +50,8 @@ public class AturanRoda2 extends AppCompatActivity implements AturanAdapter.OnCl
     }
 
     @Override
-    public void OnClickAturan(String idAturan) {
-        startActivity(DetailAturan.createIntent(getApplicationContext(), idAturan));
+    public void OnClickAturan(String idAturan, String imageURL) {
+        startActivity(DetailAturan.createIntent(this, idAturan, imageURL));
     }
 
     private void populateData(){

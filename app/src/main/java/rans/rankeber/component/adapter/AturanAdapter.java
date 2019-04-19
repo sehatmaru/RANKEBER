@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
     }
 
     public interface OnClickAturanListener {
-        void OnClickAturan(String idAturan);
+        void OnClickAturan(String key, String imageURL);
     }
 
     @NonNull
@@ -53,7 +54,7 @@ public class AturanAdapter extends RecyclerView.Adapter<AturanAdapter.MyViewHold
         holder.judul.setText(aturan.getJudul());
         Glide.with(context).load(aturan.getImageURL()).into(holder.gbr);
 
-        holder.cardview.setOnClickListener(view -> onClickAturan.OnClickAturan(aturan.getImageURL()));
+        holder.cardview.setOnClickListener(view -> onClickAturan.OnClickAturan(aturan.getKey(), aturan.getImageURL()));
     }
 
     @Override

@@ -88,7 +88,9 @@ public class Home extends AppCompatActivity implements NopolAdapter.OnClickNopol
         });
 
         if (role.equals("user"))
-            hideAdmin();
+            toUser();
+        else if (role.equals("petugas"))
+            toPetugas();
 
         populateData();
     }
@@ -210,10 +212,14 @@ public class Home extends AppCompatActivity implements NopolAdapter.OnClickNopol
         return filteredList;
     }
 
-    private void hideAdmin(){
+    private void toUser(){
         searchView.setVisibility(View.GONE);
         cardAdmin.setVisibility(View.GONE);
         rcList.setVisibility(View.GONE);
+    }
+
+    private void toPetugas(){
+        cardAdmin.setVisibility(View.GONE);
     }
 
     @Override

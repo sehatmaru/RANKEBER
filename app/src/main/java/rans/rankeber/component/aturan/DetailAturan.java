@@ -3,6 +3,7 @@ package rans.rankeber.component.aturan;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,10 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import io.realm.Realm;
 import rans.rankeber.R;
 import rans.rankeber.component.Login;
+import rans.rankeber.component.Splashscreen;
 import rans.rankeber.dependencies.realm.AturanRealm;
 import rans.rankeber.dependencies.realm.UserDBLog;
 
@@ -23,13 +31,18 @@ public class DetailAturan extends AppCompatActivity {
     ImageView gbr;
     Button btnUpdate, btnDelete;
 
+    DatabaseReference databaseReference;
+    StorageReference storageReference;
+
     AturanRealm aturanRealm;
     Realm realm;
 
-    private static String image;
+    public static String key;
+    private static String imageURL;
 
-    public static Intent createIntent(Context context, String imageURL) {
-        image = imageURL;
+    public static Intent createIntent(Context context, String keys, String image) {
+        key = keys;
+        imageURL = image;
         return new Intent(context, DetailAturan.class);
     }
 
@@ -41,11 +54,20 @@ public class DetailAturan extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
+        storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageURL);
+        databaseReference = FirebaseDatabase.getInstance().getReference(CreateAturan.DB_PATH);
+
         judul = findViewById(R.id.judul);
         isi = findViewById(R.id.isi);
         gbr = findViewById(R.id.gbr);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
+
+        btnDelete.setOnClickListener(view -> deleteData(key));
+        btnUpdate.setOnClickListener(view -> {
+            finish();
+            startActivity(UpdateAturan.createIntent(this, key));
+        });
 
         checkLogUser();
         fillData();
@@ -65,12 +87,12 @@ public class DetailAturan extends AppCompatActivity {
 
     private void fillData(){
         realm.beginTransaction();
-        aturanRealm = realm.where(AturanRealm.class).equalTo("imageURL", image).findFirst();
+        aturanRealm = realm.where(AturanRealm.class).equalTo("key", key).findFirst();
 
         if (aturanRealm != null){
             judul.setText(aturanRealm.getJudul());
             isi.setText(aturanRealm.getIsi());
-            Glide.with(this).load(image).into(gbr);
+            Glide.with(this).load(aturanRealm.getImageURL()).into(gbr);
         }
         realm.commitTransaction();
     }
@@ -78,4 +100,16 @@ public class DetailAturan extends AppCompatActivity {
     private void makeToast(String text){
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
+
+    private void deleteData(String key){
+        storageReference.delete().addOnSuccessListener(aVoid -> {
+            databaseReference.child(key).removeValue();
+
+            Intent intent = new Intent(this, CreateAturan.class);
+            startActivity(intent);
+        }).addOnFailureListener(exception -> {
+
+        });
+    }
+
 }

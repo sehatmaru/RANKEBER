@@ -21,7 +21,7 @@ public class UpdateNopol extends AppCompatActivity {
 
     EditText inputNama, inputNopol, inputAlamat;
     Spinner inputKategori;
-    Button btnTambah, btnList;
+    Button btnTambah;
 
     private static String id = "";
 
@@ -43,15 +43,10 @@ public class UpdateNopol extends AppCompatActivity {
         inputAlamat = findViewById(R.id.inputAlamat);
         inputKategori = findViewById(R.id.inputKategori);
         btnTambah = findViewById(R.id.btnTambah);
-        btnList = findViewById(R.id.btnList);
 
         setSpinner();
 
         btnTambah.setOnClickListener(view -> insertNopol());
-        btnList.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ListNopol.class);
-            startActivity(intent);
-        });
     }
 
     private void setSpinner(){
@@ -89,6 +84,13 @@ public class UpdateNopol extends AppCompatActivity {
         makeToast("Berhasil diubah");
 
         clearText();
+        toList();
+    }
+
+    private void toList(){
+        finish();
+        Intent intent = new Intent(this, ListNopol.class);
+        startActivity(intent);
     }
 
     private void makeToast(String text){

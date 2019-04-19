@@ -65,41 +65,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="208dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    tools:ignore="ContentDescription" />
-
-                <Button
-                    android:id="@+id/btnGbr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/pilih_gambar"/>
-
-            </LinearLayout>
-
             <Button
-                android:id="@+id/btnTambah"
+                android:id="@+id/btnSimpan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/simpan"/>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/list_aturan"
-            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 
