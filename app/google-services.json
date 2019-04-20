@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "611806164235",
+    "firebase_url": "https://rankeber-57f99.firebaseio.com",
+    "project_id": "rankeber-57f99",
+    "storage_bucket": "rankeber-57f99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611806164235:android:c68acbc469743576",
+        "android_client_info": {
+          "package_name": "rans.rankeber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611806164235-bhkq31e99lrcp6b517udaelgiil52am6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBlpMleKQtszLh__e9axCIDlfq77TKeO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611806164235-bhkq31e99lrcp6b517udaelgiil52am6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
