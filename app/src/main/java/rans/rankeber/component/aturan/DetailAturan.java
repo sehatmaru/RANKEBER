@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class DetailAturan extends AppCompatActivity {
     TextView judul, isi;
     ImageView gbr;
     Button btnUpdate, btnDelete;
+    LinearLayout btnBottom;
 
     DatabaseReference databaseReference;
     StorageReference storageReference;
@@ -37,6 +40,7 @@ public class DetailAturan extends AppCompatActivity {
     AturanRealm aturanRealm;
     Realm realm;
 
+    String role = "";
     public static String key;
     private static String imageURL;
 
@@ -54,6 +58,8 @@ public class DetailAturan extends AppCompatActivity {
         Realm.init(this);
         realm = Realm.getDefaultInstance();
 
+        checkLogUser();
+
         storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageURL);
         databaseReference = FirebaseDatabase.getInstance().getReference(CreateAturan.DB_PATH);
 
@@ -62,12 +68,15 @@ public class DetailAturan extends AppCompatActivity {
         gbr = findViewById(R.id.gbr);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
+        btnBottom = findViewById(R.id.btnBottom);
 
         btnDelete.setOnClickListener(view -> deleteData(key));
         btnUpdate.setOnClickListener(view -> {
             finish();
             startActivity(UpdateAturan.createIntent(this, key));
         });
+
+        if (role.equals("user")) toUser();
 
         checkLogUser();
         fillData();
@@ -81,7 +90,10 @@ public class DetailAturan extends AppCompatActivity {
             makeToast("Anda harus login terlebih dahulu");
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
+        } else{
+            role = userDBLog.getRole();
         }
+
         realm.commitTransaction();
     }
 
@@ -112,4 +124,7 @@ public class DetailAturan extends AppCompatActivity {
         });
     }
 
+    private void toUser(){
+        btnBottom.setVisibility(View.GONE);
+    }
 }
