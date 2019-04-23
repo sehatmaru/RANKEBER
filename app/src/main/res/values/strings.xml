@@ -61,11 +61,12 @@
     <string name="tambah">Tambah</string>
     <string name="list_aturan">List Aturan</string>
     <string name="aturan">Aturan</string>
-    <string name="list_nopol">List Nopol</string>
+    <string name="list_nopol">List No polisi</string>
     <string name="update">Update</string>
     <string name="hapus">Hapus</string>
     <string name="simpan">Simpan</string>
     <string name="ubah_aturan">Ubah Aturan</string>
-    <string name="ubah_nopol">Ubah Nopol</string>
+    <string name="ubah_nopol">Ubah Nomor Polisi</string>
     <string name="tambah_aturan">Tambah Aturan</string>
+    <string name="nomorpolisi">Nomor polisi</string>
 </resources>

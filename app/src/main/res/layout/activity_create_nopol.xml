@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/signupColor"
         app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     <RelativeLayout
@@ -37,30 +37,41 @@
             <EditText
                 android:id="@+id/inputNopol"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/nopol"/>
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="@string/nomorpolisi"/>
 
             <EditText
                 android:id="@+id/inputNama"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:layout_height="50dp"
                 android:hint="@string/nama"/>
 
             <EditText
                 android:id="@+id/inputAlamat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext"
+                android:layout_height="50dp"
                 android:hint="@string/alamat"/>
 
             <Spinner
                 android:id="@+id/inputKategori"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="45dp"/>
 
             <Button
                 android:id="@+id/btnTambah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:shadowColor="@android:color/transparent"
+                android:padding="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/shapesignup"
+                android:textColor="@color/white"
                 android:text="@string/tambah"/>
 
         </LinearLayout>
@@ -70,6 +81,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/list_nopol"
+            android:shadowColor="@android:color/transparent"
+            android:padding="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/shapesignup"
+            android:textColor="@color/white"
             android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>

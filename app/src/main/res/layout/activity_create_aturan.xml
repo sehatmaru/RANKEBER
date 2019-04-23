@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/signupColor"
         app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     <RelativeLayout
@@ -42,8 +42,9 @@
 
             <EditText
                 android:id="@+id/inputJudul"
+                android:background="@drawable/rounded_edittext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:inputType="text"
                 tools:ignore="LabelFor" />
 
@@ -56,8 +57,9 @@
             <EditText
                 android:id="@+id/inputIsi"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:inputType="text"
+                android:background="@drawable/rounded_edittext"
                 tools:ignore="LabelFor" />
 
             <Spinner
@@ -79,10 +81,18 @@
 
                 <Button
                     android:id="@+id/btnGbr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/pilih_gambar"/>
+                    android:text="@string/pilih_gambar"
+                    android:shadowColor="@android:color/transparent"
+                    android:padding="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/shapesignup"
+                    android:textColor="@color/white"
+
+                    android:layout_width="150dp"
+                    android:layout_height="50dp" />
 
             </LinearLayout>
 
@@ -90,6 +100,14 @@
                 android:id="@+id/btnTambah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:shadowColor="@android:color/transparent"
+                android:padding="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/shapesignup"
+                android:textColor="@color/white"
                 android:text="@string/tambah"/>
 
         </LinearLayout>
@@ -99,6 +117,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/list_aturan"
+            android:shadowColor="@android:color/transparent"
+            android:padding="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/shapesignup"
+            android:textColor="@color/white"
             android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
